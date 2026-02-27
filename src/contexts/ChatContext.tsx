@@ -26,8 +26,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true);
 
     try {
-      const apiUrl = import.meta.env.VITE_FRANCO_MANCA_API_URL;
-      const apiKey = import.meta.env.VITE_FRANCO_MANCA_API_KEY;
+      const apiUrl = 'https://nbaruermb9.us-east-1.awsapprunner.com/chat';
+      const apiKey = 'j.vSH4Q4(586)';
 
       const response = await fetch(apiUrl, {
         method: 'POST',
