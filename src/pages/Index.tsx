@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mic, Send } from 'lucide-react';
-import restaurantBg from '@/assets/restaurant-bg.jpg';
+import { CONFIG } from '@/config';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useChat } from '@/contexts/ChatContext';
 
@@ -44,14 +44,14 @@ const Index = () => {
     <div className="relative flex min-h-screen flex-col items-center overflow-auto">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
-        <img src={restaurantBg} alt="" className="h-full w-full object-cover" />
+        <img src={CONFIG.BACKGROUND_IMAGE} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* Content */}
       <div className="flex w-full max-w-md flex-col items-center px-4 py-8">
         <h1 className="font-display text-5xl font-black text-foreground drop-shadow-lg">
-          {t('title')}
+          {CONFIG.RESTAURANT_NAME}
         </h1>
         <p className="mt-3 max-w-xs text-center text-sm leading-relaxed text-foreground/70">
           {t('subtitle')}
@@ -111,8 +111,8 @@ const Index = () => {
         </p>
         <p className="mt-4 text-xs text-foreground/40">
           {t('poweredBy')}{' '}
-          <a href="https://holamenuai.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
-            HolaMenuAI
+          <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
+            {CONFIG.BRANDING_NAME}
           </a>
         </p>
       </div>

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useRef } from 'react';
+import { CONFIG } from '@/config';
 
 export type Message = {
   id: string;
@@ -16,9 +17,6 @@ type ChatContextType = {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-const API_URL = 'https://nbaruermb9.us-east-1.awsapprunner.com/chat';
-const API_KEY = 'j.vSH4Q4(586)';
-
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +25,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string }> => {
     formData.append('session_id', sessionIdRef.current);
 
-    const res = await fetch(API_URL, {
+    const res = await fetch(CONFIG.BACKEND_URL, {
       method: 'POST',
       headers: {
-        'X-API-KEY': API_KEY,
+        'X-API-KEY': CONFIG.API_KEY,
       },
       body: formData,
     });
