@@ -1,22 +1,20 @@
-import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { useChat } from '@/contexts/ChatContext';
 
-const quickOptions = [
-  { key: 'veggie' as const, emoji: '🥕', message: 'Show me vegetarian options from the menu.' },
-  { key: 'findMyVibe' as const, emoji: '🍸', message: 'Help me find my vibe.' },
-  { key: 'vegan' as const, emoji: '🌿', message: 'Show me vegan options from the menu.' },
+export type QuickAskKey = 'veggie' | 'findMyVibe' | 'vegan';
+
+const quickOptions: { key: QuickAskKey; emoji: string }[] = [
+  { key: 'veggie', emoji: '🥕' },
+  { key: 'findMyVibe', emoji: '🍸' },
+  { key: 'vegan', emoji: '🌿' },
 ];
 
-const QuickAsk = () => {
-  const { t } = useLanguage();
-  const navigate = useNavigate();
-  const { resetChat } = useChat();
+type Props = {
+  selected: Set<QuickAskKey>;
+  onToggle: (key: QuickAskKey) => void;
+};
 
-  const handleClick = (message: string) => {
-    resetChat();
-    navigate(`/chat?message=${encodeURIComponent(message)}`);
-  };
+const QuickAsk = ({ selected, onToggle }: Props) => {
+  const { t } = useLanguage();
 
   return (
     <div>
@@ -27,8 +25,12 @@ const QuickAsk = () => {
         {quickOptions.map((opt) => (
           <button
             key={opt.key}
-            onClick={() => handleClick(opt.message)}
-            className="glass-button glass-blue-glow flex flex-col items-center gap-1.5 rounded-xl p-3 transition-all hover:scale-105"
+            onClick={() => onToggle(opt.key)}
+            className={`flex flex-col items-center gap-1.5 rounded-xl p-3 transition-all hover:scale-105 ${
+              selected.has(opt.key)
+                ? 'glass-blue-active text-foreground'
+                : 'glass-button glass-blue-glow'
+            }`}
           >
             <span className="text-2xl">{opt.emoji}</span>
             <span className="text-xs font-medium text-foreground/80">{t(opt.key)}</span>

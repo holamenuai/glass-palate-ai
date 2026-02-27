@@ -7,7 +7,7 @@ import { useChat } from '@/contexts/ChatContext';
 
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AllergySelector, { type AllergyKey } from '@/components/AllergySelector';
-import QuickAsk from '@/components/QuickAsk';
+import QuickAsk, { type QuickAskKey } from '@/components/QuickAsk';
 import SearchBar from '@/components/SearchBar';
 import ListeningOverlay from '@/components/ListeningOverlay';
 
@@ -16,6 +16,7 @@ const Index = () => {
   const navigate = useNavigate();
   const { resetChat, sendAudio } = useChat();
   const [selectedAllergies, setSelectedAllergies] = useState<Set<AllergyKey>>(new Set());
+  const [selectedQuickAsks, setSelectedQuickAsks] = useState<Set<QuickAskKey>>(new Set());
   const [showListening, setShowListening] = useState(false);
 
   const toggleAllergy = (key: AllergyKey) => {
@@ -86,11 +87,20 @@ const Index = () => {
           </div>
 
           <div className="mt-4">
-            <QuickAsk />
+            <QuickAsk
+              selected={selectedQuickAsks}
+              onToggle={(key) => {
+                setSelectedQuickAsks((prev) => {
+                  const next = new Set(prev);
+                  next.has(key) ? next.delete(key) : next.add(key);
+                  return next;
+                });
+              }}
+            />
           </div>
 
           <div className="mt-4">
-            <SearchBar selectedAllergies={selectedAllergies} />
+            <SearchBar selectedAllergies={selectedAllergies} selectedQuickAsks={selectedQuickAsks} />
           </div>
         </div>
 
