@@ -109,7 +109,10 @@ const Index = () => {
           {t('disclaimer')}
         </p>
         <p className="mt-4 text-xs text-foreground/40">
-          {t('poweredBy')} <span className="font-bold text-foreground/60">HolaMenuAI</span>
+          {t('poweredBy')}{' '}
+          <a href="https://holamenuai.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
+            HolaMenuAI
+          </a>
         </p>
       </div>
 
