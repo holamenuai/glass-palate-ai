@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
 import { useChat } from '@/contexts/ChatContext';
 import { useLanguage } from '@/i18n/LanguageContext';
-import restaurantBg from '@/assets/restaurant-bg.jpg';
+import { CONFIG } from '@/config';
 import ReactMarkdown from 'react-markdown';
 import TypewriterText from '@/components/TypewriterText';
 
@@ -74,8 +74,8 @@ const Chat = () => {
   const brandingFooter = (
     <p className="mt-4 pb-6 text-xs text-foreground/40">
       {t('poweredBy')}{' '}
-      <a href="https://holamenuai.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
-        HolaMenuAI
+      <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
+        {CONFIG.BRANDING_NAME}
       </a>
     </p>
   );
@@ -86,7 +86,7 @@ const Chat = () => {
       <div className="relative flex min-h-screen flex-col items-center justify-center overflow-auto">
         {/* Background */}
         <div className="fixed inset-0 -z-10">
-          <img src={restaurantBg} alt="" className="h-full w-full object-cover" />
+          <img src={CONFIG.BACKGROUND_IMAGE} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
         </div>
 
@@ -96,7 +96,7 @@ const Chat = () => {
             <button onClick={() => navigate('/')} className="glass-button rounded-full p-2">
               <ArrowLeft className="h-5 w-5 text-foreground" />
             </button>
-            <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{t('title')}</h1>
+            <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{CONFIG.RESTAURANT_NAME}</h1>
           </div>
         </div>
 
@@ -137,7 +137,7 @@ const Chat = () => {
     <div className={`relative flex min-h-screen flex-col items-center justify-center overflow-auto ${chatVisible ? 'animate-fade-in' : ''}`}>
       {/* Background */}
       <div className="fixed inset-0 -z-10">
-        <img src={restaurantBg} alt="" className="h-full w-full object-cover" />
+        <img src={CONFIG.BACKGROUND_IMAGE} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
@@ -147,7 +147,7 @@ const Chat = () => {
           <button onClick={() => navigate('/')} className="glass-button rounded-full p-2">
             <ArrowLeft className="h-5 w-5 text-foreground" />
           </button>
-          <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{t('title')}</h1>
+          <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{CONFIG.RESTAURANT_NAME}</h1>
         </div>
         <p className="text-xs text-foreground/60">AI Concierge</p>
       </div>
