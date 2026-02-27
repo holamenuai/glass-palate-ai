@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
 import { useChat } from '@/contexts/ChatContext';
 import { useLanguage } from '@/i18n/LanguageContext';
 import restaurantBg from '@/assets/restaurant-bg.jpg';
 import ReactMarkdown from 'react-markdown';
+import TypewriterText from '@/components/TypewriterText';
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -14,6 +15,27 @@ const Chat = () => {
   const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
   const sentInitialRef = useRef(false);
+  // Track which message IDs have already been shown (skip typewriter for old ones)
+  const seenMsgIds = useRef<Set<string>>(new Set());
+  const [animatingIds, setAnimatingIds] = useState<Set<string>>(new Set());
+
+  // Mark a message as "should animate" when it first appears
+  useEffect(() => {
+    messages.forEach((msg) => {
+      if (!seenMsgIds.current.has(msg.id)) {
+        seenMsgIds.current.add(msg.id);
+        setAnimatingIds((prev) => new Set(prev).add(msg.id));
+      }
+    });
+  }, [messages]);
+
+  const handleAnimationComplete = useCallback((id: string) => {
+    setAnimatingIds((prev) => {
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
+  }, []);
 
   // Auto-send initial message from query param
   useEffect(() => {
@@ -27,7 +49,7 @@ const Chat = () => {
   // Auto-scroll
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages, isLoading]);
+  }, [messages, isLoading, animatingIds]);
 
   const handleSend = () => {
     if (!input.trim() || isLoading) return;
@@ -56,28 +78,48 @@ const Chat = () => {
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
+        {messages.map((msg) => {
+          const shouldAnimate = animatingIds.has(msg.id);
+
+          return (
             <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                msg.role === 'user'
-                  ? 'glass-blue-active text-foreground'
-                  : 'glass text-foreground'
-              }`}
+              key={msg.id}
+              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              {msg.role === 'assistant' ? (
-                <div className="prose prose-sm prose-invert max-w-none">
-                  <ReactMarkdown>{msg.content}</ReactMarkdown>
-                </div>
-              ) : (
-                msg.content
-              )}
+              <div
+                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  msg.role === 'user'
+                    ? 'glass-blue-active text-foreground'
+                    : 'glass text-foreground'
+                }`}
+              >
+                {msg.role === 'assistant' ? (
+                  shouldAnimate ? (
+                    <div className="prose prose-sm prose-invert max-w-none">
+                      <TypewriterText
+                        text={msg.content}
+                        speed={10}
+                        onComplete={() => handleAnimationComplete(msg.id)}
+                      />
+                    </div>
+                  ) : (
+                    <div className="prose prose-sm prose-invert max-w-none">
+                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    </div>
+                  )
+                ) : shouldAnimate ? (
+                  <TypewriterText
+                    text={msg.content}
+                    speed={15}
+                    onComplete={() => handleAnimationComplete(msg.id)}
+                  />
+                ) : (
+                  msg.content
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {isLoading && (
           <div className="flex justify-start">
             <div className="glass rounded-2xl px-4 py-3">
