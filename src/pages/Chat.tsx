@@ -63,21 +63,20 @@ const Chat = () => {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Header above card */}
-      <div className="flex w-full max-w-[560px] items-center justify-between px-4 pb-3 pt-6">
-        <div className="flex items-center gap-3">
+      <div className="flex w-[90%] max-w-[450px] items-center justify-between pb-2 pt-4">
+        <div className="flex items-center gap-2">
           <button onClick={() => navigate('/')} className="glass-button rounded-full p-2">
-            <ArrowLeft className="h-5 w-5 text-foreground" />
+            <ArrowLeft className="h-4 w-4 text-foreground" />
           </button>
-          <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{CONFIG.RESTAURANT_NAME}</h1>
+          <h1 className="font-display text-xl font-black text-foreground drop-shadow-lg">{CONFIG.RESTAURANT_NAME}</h1>
         </div>
-        <p className="text-xs text-foreground/60">AI Concierge</p>
+        <p className="text-[11px] text-foreground/60">AI Concierge</p>
       </div>
 
       {isWriteMode ? (
         /* Pre-chat card for Write button */
-        <div className="glass-strong w-full max-w-[560px] rounded-3xl flex flex-col items-center justify-center p-8" style={{ height: 'min(70vh, 600px)' }}>
-          <h2 className="mb-6 text-center text-lg font-bold text-foreground">
+        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col items-center justify-center p-6" style={{ height: 'min(60vh, 420px)' }}>
+          <h2 className="mb-5 text-center text-base font-bold text-foreground">
             {t('howCanIHelp')}
           </h2>
           <div className="flex w-full items-center gap-2">
@@ -88,12 +87,12 @@ const Chat = () => {
               onKeyDown={(e) => e.key === 'Enter' && handlePreChatSend()}
               placeholder={t('write') + '...'}
               autoFocus
-              className="flex-1 rounded-full bg-foreground/10 px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+              className="flex-1 rounded-full bg-foreground/10 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
             />
             <button
               onClick={handlePreChatSend}
               disabled={!preChatInput.trim()}
-              className="glass-button-solid rounded-full p-3 disabled:opacity-40"
+              className="glass-button-solid rounded-full p-2.5 disabled:opacity-40"
             >
               <Send className="h-4 w-4" />
             </button>
@@ -101,7 +100,7 @@ const Chat = () => {
         </div>
       ) : (
         /* Full chat conversation */
-        <div className="glass-strong w-full max-w-[560px] rounded-3xl flex flex-col" style={{ height: 'min(70vh, 600px)' }}>
+        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col" style={{ height: 'min(65vh, 500px)' }}>
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
             {messages.map((msg) => {
@@ -160,7 +159,7 @@ const Chat = () => {
           </div>
 
           {/* Input */}
-          <div className="border-t border-foreground/10 px-5 py-3">
+          <div className="border-t border-foreground/10 px-4 py-2.5">
             <div className="flex items-center gap-2">
               <input
                 type="text"
@@ -168,7 +167,7 @@ const Chat = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder={t('write') + '...'}
-                className="flex-1 rounded-full bg-foreground/10 px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+                className="flex-1 rounded-full bg-foreground/10 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
               />
               <button
                 onClick={handleSend}
@@ -182,7 +181,7 @@ const Chat = () => {
         </div>
       )}
 
-      <p className="mt-4 pb-6 text-xs text-foreground/40">
+      <p className="mt-3 pb-4 text-xs text-foreground/40">
         {t('poweredBy')}{' '}
         <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
           {CONFIG.BRANDING_NAME}

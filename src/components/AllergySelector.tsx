@@ -26,19 +26,19 @@ const AllergySelector = ({ selected = new Set(), onToggle }: Props) => {
       <h3 className="mb-3 text-center text-xs font-bold tracking-widest text-foreground/80">
         {t('selectAllergies')}
       </h3>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-1.5">
         {allergyKeys.map((key) => (
           <button
             key={key}
             onClick={() => onToggle(key)}
-            className={`flex flex-col items-center gap-1 rounded-xl p-2 text-center transition-all ${
+            className={`flex flex-col items-center gap-0.5 rounded-xl p-1.5 text-center transition-all ${
               selected.has(key)
                 ? 'glass-blue-active text-foreground'
                 : 'glass-button'
             }`}
           >
-            <span className="text-xl">{allergyEmojis[key]}</span>
-            <span className="text-[10px] font-medium leading-tight text-foreground/80">
+            <span className="text-lg">{allergyEmojis[key]}</span>
+            <span className="text-[9px] font-medium leading-tight text-foreground/80">
               {t(key)}
             </span>
           </button>
