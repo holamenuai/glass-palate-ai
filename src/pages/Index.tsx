@@ -36,7 +36,7 @@ const Index = () => {
 
   const handleWrite = () => {
     resetChat();
-    navigate('/chat');
+    navigate('/chat?mode=write');
   };
 
 
