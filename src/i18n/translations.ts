@@ -48,6 +48,7 @@ type TranslationKeys = {
   queryVeganPrefix: string;
   queryVeganStandalone: string;
   queryAllergyOnly: string;
+  preChatPlaceholder: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -76,6 +77,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Show me vegan dishes that are also free from:',
     queryVeganStandalone: 'Show me vegan options from the menu.',
     queryAllergyOnly: 'I am allergic to {allergies}. Based on the menu, what can I safely eat?',
+    preChatPlaceholder: 'e.g., are there vegan options?',
   },
   es: {
     title: 'Franco Manca',
@@ -102,6 +104,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Muéstrame platos veganos que también estén libres de:',
     queryVeganStandalone: 'Muéstrame opciones veganas del menú.',
     queryAllergyOnly: 'Soy alérgico a {allergies}. Según el menú, ¿qué puedo comer de forma segura?',
+    preChatPlaceholder: 'ej., ¿hay opciones veganas?',
   },
   fr: {
     title: 'Franco Manca',
@@ -128,6 +131,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Montrez-moi des plats végétaliens qui sont aussi sans:',
     queryVeganStandalone: 'Montrez-moi les options végétaliennes du menu.',
     queryAllergyOnly: 'Je suis allergique à {allergies}. D\'après le menu, que puis-je manger en toute sécurité?',
+    preChatPlaceholder: 'ex., y a-t-il des options véganes ?',
   },
   de: {
     title: 'Franco Manca',
@@ -154,6 +158,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Zeig mir vegane Gerichte, die auch frei von:',
     queryVeganStandalone: 'Zeig mir vegane Optionen aus der Speisekarte.',
     queryAllergyOnly: 'Ich bin allergisch gegen {allergies}. Was kann ich laut Speisekarte sicher essen?',
+    preChatPlaceholder: 'z.B., gibt es vegane Optionen?',
   },
   it: {
     title: 'Franco Manca',
@@ -180,6 +185,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Mostrami piatti vegani che siano anche privi di:',
     queryVeganStandalone: 'Mostrami le opzioni vegane dal menu.',
     queryAllergyOnly: 'Sono allergico a {allergies}. In base al menu, cosa posso mangiare in sicurezza?',
+    preChatPlaceholder: 'es., ci sono opzioni vegane?',
   },
   zh: {
     title: 'Franco Manca',
@@ -206,6 +212,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: '请展示不含以下成分的纯素菜品：',
     queryVeganStandalone: '请展示菜单中的纯素选项。',
     queryAllergyOnly: '我对{allergies}过敏。根据菜单，我可以安全地吃什么？',
+    preChatPlaceholder: '例如，有纯素选项吗？',
   },
   ar: {
     title: 'Franco Manca',
@@ -232,6 +239,7 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'أرني أطباقاً نباتية صرفة خالية أيضاً من:',
     queryVeganStandalone: 'أرني الخيارات النباتية الصرفة من القائمة.',
     queryAllergyOnly: 'أنا أعاني من حساسية تجاه {allergies}. بناءً على القائمة، ماذا يمكنني أن آكل بأمان؟',
+    preChatPlaceholder: 'مثال، هل هناك خيارات نباتية؟',
   },
   pl: {
     title: 'Franco Manca',
@@ -258,5 +266,6 @@ export const translations: Record<Language, TranslationKeys> = {
     queryVeganPrefix: 'Pokaż mi dania wegańskie, które są również wolne od:',
     queryVeganStandalone: 'Pokaż mi opcje wegańskie z menu.',
     queryAllergyOnly: 'Mam alergię na {allergies}. Na podstawie menu, co mogę bezpiecznie zjeść?',
+    preChatPlaceholder: 'np., czy są opcje wegańskie?',
   },
 };

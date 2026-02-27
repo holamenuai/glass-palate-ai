@@ -39,6 +39,7 @@ const Index = () => {
     navigate('/chat');
   };
 
+
   return (
     <div className="relative flex min-h-screen flex-col items-center overflow-auto">
       {/* Background */}
