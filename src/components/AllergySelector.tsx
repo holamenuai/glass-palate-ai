@@ -33,7 +33,7 @@ const AllergySelector = ({ selected = new Set(), onToggle }: Props) => {
             onClick={() => onToggle(key)}
             className={`flex flex-col items-center gap-1 rounded-xl p-2 text-center transition-all ${
               selected.has(key)
-                ? 'glass-strong ring-2 ring-foreground/40'
+                ? 'glass-blue-active text-foreground'
                 : 'glass-button'
             }`}
           >

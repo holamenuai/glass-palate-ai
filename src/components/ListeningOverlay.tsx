@@ -69,7 +69,7 @@ const ListeningOverlay = ({ onResult, onClose }: Props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center" style={{ background: 'hsl(213 80% 12% / 0.95)', backdropFilter: 'blur(20px)' }}>
       <button onClick={() => { stop(); onClose(); }} className="absolute top-6 right-6 text-foreground/60 hover:text-foreground">
         <X className="h-8 w-8" />
       </button>
@@ -78,25 +78,30 @@ const ListeningOverlay = ({ onResult, onClose }: Props) => {
         {status === 'listening' ? (t('speak') + '...') : 'Processing...'}
       </p>
 
-      {/* Stop recording button */}
+      {/* Pulsating mic / stop button */}
       {status === 'listening' && (
         <button
           onClick={stop}
-          className="mb-8 h-20 w-20 rounded-full bg-red-500/80 flex items-center justify-center hover:bg-red-500 transition-colors"
+          className="mb-8 h-24 w-24 rounded-full flex items-center justify-center transition-colors"
+          style={{
+            background: 'hsl(213 100% 40% / 0.7)',
+            boxShadow: '0 0 30px hsl(213 100% 50% / 0.5), 0 0 60px hsl(213 100% 50% / 0.2)',
+            animation: 'pulse-blue 2s ease-in-out infinite',
+          }}
         >
           <div className="h-8 w-8 rounded-sm bg-white" />
         </button>
       )}
 
       {/* Waveform animation */}
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1.5" style={{ filter: 'drop-shadow(0 0 8px hsl(213 100% 60% / 0.5))' }}>
         {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}
             className="w-1.5 rounded-full"
             style={{
               height: '40px',
-              background: `hsl(${(i * 30) % 360}, 70%, 60%)`,
+              background: `hsl(213, ${60 + (i * 3)}%, ${50 + (i * 2)}%)`,
               animation: `waveform 1.2s ease-in-out infinite`,
               animationDelay: `${i * 0.08}s`,
             }}
@@ -110,6 +115,10 @@ const ListeningOverlay = ({ onResult, onClose }: Props) => {
         @keyframes waveform {
           0%, 100% { transform: scaleY(0.3); }
           50% { transform: scaleY(1.2); }
+        }
+        @keyframes pulse-blue {
+          0%, 100% { box-shadow: 0 0 30px hsl(213 100% 50% / 0.5), 0 0 60px hsl(213 100% 50% / 0.2); }
+          50% { box-shadow: 0 0 50px hsl(213 100% 50% / 0.7), 0 0 90px hsl(213 100% 50% / 0.3); }
         }
       `}</style>
     </div>

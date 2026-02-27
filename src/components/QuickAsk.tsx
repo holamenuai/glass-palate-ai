@@ -28,7 +28,7 @@ const QuickAsk = () => {
           <button
             key={opt.key}
             onClick={() => handleClick(opt.message)}
-            className="glass-button flex flex-col items-center gap-1.5 rounded-xl p-3 transition-all hover:scale-105"
+            className="glass-button glass-blue-glow flex flex-col items-center gap-1.5 rounded-xl p-3 transition-all hover:scale-105"
           >
             <span className="text-2xl">{opt.emoji}</span>
             <span className="text-xs font-medium text-foreground/80">{t(opt.key)}</span>
