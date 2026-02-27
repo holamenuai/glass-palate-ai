@@ -14,12 +14,23 @@ const Chat = () => {
   const { t } = useLanguage();
   const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
-  const sentInitialRef = useRef(false);
-  // Track which message IDs have already been shown (skip typewriter for old ones)
   const seenMsgIds = useRef<Set<string>>(new Set());
   const [animatingIds, setAnimatingIds] = useState<Set<string>>(new Set());
 
-  // Mark a message as "should animate" when it first appears
+  // Pre-chat state
+  const prefill = searchParams.get('prefill');
+  const [preChatMode, setPreChatMode] = useState(true);
+  const [preChatInput, setPreChatInput] = useState('');
+  const [chatVisible, setChatVisible] = useState(false);
+
+  // Initialize pre-chat input from prefill param
+  useEffect(() => {
+    if (prefill) {
+      setPreChatInput(decodeURIComponent(prefill));
+    }
+  }, [prefill]);
+
+  // Mark messages for animation
   useEffect(() => {
     messages.forEach((msg) => {
       if (!seenMsgIds.current.has(msg.id)) {
@@ -37,19 +48,21 @@ const Chat = () => {
     });
   }, []);
 
-  // Auto-send initial message from query param
-  useEffect(() => {
-    const initialMsg = searchParams.get('message');
-    if (initialMsg && !sentInitialRef.current) {
-      sentInitialRef.current = true;
-      sendMessage(decodeURIComponent(initialMsg));
-    }
-  }, [searchParams, sendMessage]);
-
   // Auto-scroll
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, isLoading, animatingIds]);
+
+  const handlePreChatSend = () => {
+    const text = preChatInput.trim();
+    if (!text) return;
+    setPreChatMode(false);
+    // Small delay to let animation start before sending
+    setTimeout(() => {
+      setChatVisible(true);
+      sendMessage(text);
+    }, 50);
+  };
 
   const handleSend = () => {
     if (!input.trim() || isLoading) return;
@@ -57,8 +70,71 @@ const Chat = () => {
     setInput('');
   };
 
+  // Branding footer (shared)
+  const brandingFooter = (
+    <p className="mt-4 pb-6 text-xs text-foreground/40">
+      {t('poweredBy')}{' '}
+      <a href="https://holamenuai.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
+        HolaMenuAI
+      </a>
+    </p>
+  );
+
+  // ── Pre-Chat Card ──
+  if (preChatMode) {
+    return (
+      <div className="relative flex min-h-screen flex-col items-center justify-center overflow-auto">
+        {/* Background */}
+        <div className="fixed inset-0 -z-10">
+          <img src={restaurantBg} alt="" className="h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        {/* Header */}
+        <div className="flex w-full max-w-[560px] items-center justify-between px-4 pb-3">
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate('/')} className="glass-button rounded-full p-2">
+              <ArrowLeft className="h-5 w-5 text-foreground" />
+            </button>
+            <h1 className="font-display text-2xl font-black text-foreground drop-shadow-lg">{t('title')}</h1>
+          </div>
+        </div>
+
+        {/* Pre-Chat Card */}
+        <div className="glass-strong w-full max-w-[560px] rounded-3xl p-8 animate-scale-in">
+          <h2 className="text-center text-xl font-bold text-foreground mb-6">
+            {t('howCanIHelp')}
+          </h2>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={preChatInput}
+              onChange={(e) => setPreChatInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handlePreChatSend()}
+              placeholder={t('preChatPlaceholder') || 'e.g., are there vegan options?'}
+              className="flex-1 rounded-full bg-foreground/10 px-5 py-4 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+              autoFocus
+            />
+            <button
+              onClick={handlePreChatSend}
+              disabled={!preChatInput.trim()}
+              className="glass-button-solid rounded-full p-4 disabled:opacity-40 glass-blue-glow"
+              style={{ backgroundColor: 'hsl(213, 100%, 40%)' }}
+            >
+              <Send className="h-5 w-5 text-white" />
+            </button>
+          </div>
+        </div>
+
+        {brandingFooter}
+      </div>
+    );
+  }
+
+  // ── Full Chat View ──
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-auto">
+    <div className={`relative flex min-h-screen flex-col items-center justify-center overflow-auto ${chatVisible ? 'animate-fade-in' : ''}`}>
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img src={restaurantBg} alt="" className="h-full w-full object-cover" />
@@ -157,13 +233,7 @@ const Chat = () => {
         </div>
       </div>
 
-      {/* Branding */}
-      <p className="mt-4 pb-6 text-xs text-foreground/40">
-        {t('poweredBy')}{' '}
-        <a href="https://holamenuai.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
-          HolaMenuAI
-        </a>
-      </p>
+      {brandingFooter}
     </div>
   );
 };

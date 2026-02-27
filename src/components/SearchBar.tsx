@@ -46,7 +46,7 @@ const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
 
     const message = messages.join(' ');
     resetChat();
-    navigate(`/chat?message=${encodeURIComponent(message)}`);
+    navigate(`/chat?prefill=${encodeURIComponent(message)}`);
   };
 
   const count = selectedAllergies.size + selectedQuickAsks.size;
