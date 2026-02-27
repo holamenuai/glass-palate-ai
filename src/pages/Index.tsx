@@ -1,13 +1,40 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Mic, Send } from 'lucide-react';
 import restaurantBg from '@/assets/restaurant-bg.jpg';
 import { useLanguage } from '@/i18n/LanguageContext';
+import { useChat } from '@/contexts/ChatContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import AllergySelector from '@/components/AllergySelector';
+import AllergySelector, { type AllergyKey } from '@/components/AllergySelector';
 import QuickAsk from '@/components/QuickAsk';
 import SearchBar from '@/components/SearchBar';
+import ListeningOverlay from '@/components/ListeningOverlay';
 
 const Index = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { resetChat } = useChat();
+  const [selectedAllergies, setSelectedAllergies] = useState<Set<AllergyKey>>(new Set());
+  const [showListening, setShowListening] = useState(false);
+
+  const toggleAllergy = (key: AllergyKey) => {
+    setSelectedAllergies((prev) => {
+      const next = new Set(prev);
+      next.has(key) ? next.delete(key) : next.add(key);
+      return next;
+    });
+  };
+
+  const handleVoiceResult = (transcript: string) => {
+    setShowListening(false);
+    resetChat();
+    navigate(`/chat?message=${encodeURIComponent(transcript)}`);
+  };
+
+  const handleWrite = () => {
+    resetChat();
+    navigate('/chat');
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col items-center overflow-auto">
@@ -19,7 +46,6 @@ const Index = () => {
 
       {/* Content */}
       <div className="flex w-full max-w-md flex-col items-center px-4 py-8">
-        {/* Header */}
         <h1 className="font-display text-5xl font-black text-foreground drop-shadow-lg">
           {t('title')}
         </h1>
@@ -27,55 +53,59 @@ const Index = () => {
           {t('subtitle')}
         </p>
 
-        {/* Language */}
         <div className="mt-5">
           <LanguageSwitcher />
         </div>
 
-        {/* Main Card */}
         <div className="glass-strong mt-6 w-full rounded-3xl p-5">
           <h2 className="mb-4 text-center text-lg font-bold text-foreground">
             {t('howCanIHelp')}
           </h2>
 
-          {/* Speak / Write buttons */}
           <div className="mb-5 grid grid-cols-2 gap-3">
-            <button className="glass-button-solid flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold">
+            <button
+              onClick={() => setShowListening(true)}
+              className="glass-button-solid flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold"
+            >
               <Mic className="h-4 w-4" />
               {t('speak')}
             </button>
-            <button className="glass-button flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-foreground">
+            <button
+              onClick={handleWrite}
+              className="glass-button flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-foreground"
+            >
               <Send className="h-4 w-4" />
               {t('write')}
             </button>
           </div>
 
-          {/* Allergies */}
           <div className="glass rounded-2xl p-4">
-            <AllergySelector />
+            <AllergySelector selected={selectedAllergies} onToggle={toggleAllergy} />
           </div>
 
-          {/* Quick Ask */}
           <div className="mt-4">
             <QuickAsk />
           </div>
 
-          {/* Search */}
           <div className="mt-4">
-            <SearchBar />
+            <SearchBar selectedAllergies={selectedAllergies} />
           </div>
         </div>
 
-        {/* Disclaimer */}
         <p className="mt-5 max-w-xs text-center text-[11px] leading-relaxed text-foreground/50">
           {t('disclaimer')}
         </p>
-
-        {/* Footer */}
         <p className="mt-4 text-xs text-foreground/40">
           {t('poweredBy')} <span className="font-bold text-foreground/60">HolaMenuAI</span>
         </p>
       </div>
+
+      {showListening && (
+        <ListeningOverlay
+          onResult={handleVoiceResult}
+          onClose={() => setShowListening(false)}
+        />
+      )}
     </div>
   );
 };

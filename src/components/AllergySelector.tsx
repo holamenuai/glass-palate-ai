@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 type AllergyKey = 'gluten' | 'crustaceans' | 'eggs' | 'fish' | 'peanuts' | 'soy' | 'dairy' | 'nuts' | 'celery' | 'mustard' | 'sesame' | 'sulphites' | 'lupin' | 'molluscs';
@@ -11,17 +10,16 @@ const allergyEmojis: Record<AllergyKey, string> = {
 
 const allergyKeys: AllergyKey[] = Object.keys(allergyEmojis) as AllergyKey[];
 
-const AllergySelector = () => {
-  const { t } = useLanguage();
-  const [selected, setSelected] = useState<Set<AllergyKey>>(new Set());
+export type { AllergyKey };
+export { allergyKeys };
 
-  const toggle = (key: AllergyKey) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
-      return next;
-    });
-  };
+type Props = {
+  selected: Set<AllergyKey>;
+  onToggle: (key: AllergyKey) => void;
+};
+
+const AllergySelector = ({ selected, onToggle }: Props) => {
+  const { t } = useLanguage();
 
   return (
     <div>
@@ -32,7 +30,7 @@ const AllergySelector = () => {
         {allergyKeys.map((key) => (
           <button
             key={key}
-            onClick={() => toggle(key)}
+            onClick={() => onToggle(key)}
             className={`flex flex-col items-center gap-1 rounded-xl p-2 text-center transition-all ${
               selected.has(key)
                 ? 'glass-strong ring-2 ring-foreground/40'
