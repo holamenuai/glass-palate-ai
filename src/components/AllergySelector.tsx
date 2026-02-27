@@ -18,7 +18,7 @@ type Props = {
   onToggle: (key: AllergyKey) => void;
 };
 
-const AllergySelector = ({ selected, onToggle }: Props) => {
+const AllergySelector = ({ selected = new Set(), onToggle }: Props) => {
   const { t } = useLanguage();
 
   return (
