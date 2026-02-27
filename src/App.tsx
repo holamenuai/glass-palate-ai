@@ -15,17 +15,17 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <LanguageProvider>
-        <ChatProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <ChatProvider>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </ChatProvider>
           </BrowserRouter>
-        </ChatProvider>
       </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
