@@ -74,9 +74,9 @@ const Chat = () => {
       </div>
 
       {isWriteMode ? (
-        /* Pre-chat card for Write button */
-        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col items-center justify-center p-6" style={{ height: 'min(60vh, 420px)' }}>
-          <h2 className="mb-5 text-center text-base font-bold text-foreground">
+        /* Compact pre-chat card for Write button */
+        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col items-center justify-center px-5 py-5 transition-all duration-500 ease-out" style={{ maxHeight: 'min(40vh, 180px)' }}>
+          <h2 className="mb-3 text-center text-sm font-bold text-foreground">
             {t('howCanIHelp')}
           </h2>
           <div className="flex w-full items-center gap-2">
@@ -87,7 +87,7 @@ const Chat = () => {
               onKeyDown={(e) => e.key === 'Enter' && handlePreChatSend()}
               placeholder={t('write') + '...'}
               autoFocus
-              className="flex-1 rounded-full bg-foreground/10 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+              className="flex-1 rounded-full bg-foreground/10 px-4 py-2 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
             />
             <button
               onClick={handlePreChatSend}
@@ -99,8 +99,8 @@ const Chat = () => {
           </div>
         </div>
       ) : (
-        /* Full chat conversation */
-        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col" style={{ height: 'min(65vh, 500px)' }}>
+        /* Full chat conversation – grows with content, capped height */
+        <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col transition-all duration-500 ease-out" style={{ height: 'min(65vh, 500px)' }}>
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
             {messages.map((msg) => {
