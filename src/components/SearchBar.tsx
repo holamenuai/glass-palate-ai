@@ -22,7 +22,8 @@ const quickAskTranslationKeys: Record<QuickAskKey, { prefix: TKey; standalone: T
 const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { resetChat } = useChat();
+
+  const { resetChat, sendMessage } = useChat();
 
   const hasSelection = selectedAllergies.size > 0 || selectedQuickAsks.size > 0;
 
@@ -30,23 +31,24 @@ const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
     if (!hasSelection) return;
 
     const allergyList = Array.from(selectedAllergies).map((key) => t(key)).join(', ');
-    const messages: string[] = [];
+    const msgs: string[] = [];
 
     if (selectedQuickAsks.size > 0 && selectedAllergies.size > 0) {
       for (const qa of selectedQuickAsks) {
-        messages.push(`${t(quickAskTranslationKeys[qa].prefix)} ${allergyList}.`);
+        msgs.push(`${t(quickAskTranslationKeys[qa].prefix)} ${allergyList}.`);
       }
     } else if (selectedQuickAsks.size > 0) {
       for (const qa of selectedQuickAsks) {
-        messages.push(t(quickAskTranslationKeys[qa].standalone));
+        msgs.push(t(quickAskTranslationKeys[qa].standalone));
       }
     } else {
-      messages.push(t('queryAllergyOnly').replace('{allergies}', allergyList));
+      msgs.push(t('queryAllergyOnly').replace('{allergies}', allergyList));
     }
 
-    const message = messages.join(' ');
+    const message = msgs.join(' ');
     resetChat();
-    navigate(`/chat?prefill=${encodeURIComponent(message)}`);
+    sendMessage(message);
+    navigate('/chat');
   };
 
   const count = selectedAllergies.size + selectedQuickAsks.size;
