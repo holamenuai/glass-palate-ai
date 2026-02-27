@@ -4,16 +4,19 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { useChat } from '@/contexts/ChatContext';
 import type { AllergyKey } from './AllergySelector';
 import type { QuickAskKey } from './QuickAsk';
+import type { translations } from '@/i18n/translations';
+
+type TKey = keyof typeof translations['en'];
 
 type Props = {
   selectedAllergies: Set<AllergyKey>;
   selectedQuickAsks: Set<QuickAskKey>;
 };
 
-const quickAskPhrases: Record<QuickAskKey, { prefix: string; standalone: string }> = {
-  veggie: { prefix: 'Show me vegetarian dishes that are also free from:', standalone: 'Show me vegetarian options from the menu.' },
-  findMyVibe: { prefix: 'Show me popular dishes that are also free from:', standalone: 'Help me find my vibe.' },
-  vegan: { prefix: 'Show me vegan dishes that are also free from:', standalone: 'Show me vegan options from the menu.' },
+const quickAskTranslationKeys: Record<QuickAskKey, { prefix: TKey; standalone: TKey }> = {
+  veggie: { prefix: 'queryVeggiePrefix', standalone: 'queryVeggieStandalone' },
+  findMyVibe: { prefix: 'queryVibePrefix', standalone: 'queryVibeStandalone' },
+  vegan: { prefix: 'queryVeganPrefix', standalone: 'queryVeganStandalone' },
 };
 
 const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
@@ -31,14 +34,14 @@ const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
 
     if (selectedQuickAsks.size > 0 && selectedAllergies.size > 0) {
       for (const qa of selectedQuickAsks) {
-        messages.push(`${quickAskPhrases[qa].prefix} ${allergyList}.`);
+        messages.push(`${t(quickAskTranslationKeys[qa].prefix)} ${allergyList}.`);
       }
     } else if (selectedQuickAsks.size > 0) {
       for (const qa of selectedQuickAsks) {
-        messages.push(quickAskPhrases[qa].standalone);
+        messages.push(t(quickAskTranslationKeys[qa].standalone));
       }
     } else {
-      messages.push(`I am allergic to ${allergyList}. Based on the menu, what can I safely eat?`);
+      messages.push(t('queryAllergyOnly').replace('{allergies}', allergyList));
     }
 
     const message = messages.join(' ');
