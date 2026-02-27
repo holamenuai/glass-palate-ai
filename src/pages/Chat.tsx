@@ -64,7 +64,7 @@ const Chat = () => {
             <div
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                 msg.role === 'user'
-                  ? 'glass-button-solid text-foreground/90'
+                  ? 'glass-blue-active text-foreground'
                   : 'glass text-foreground'
               }`}
             >
@@ -100,7 +100,7 @@ const Chat = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder={t('write') + '...'}
-            className="flex-1 rounded-full bg-foreground/10 px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 focus:border-foreground/30"
+            className="flex-1 rounded-full bg-foreground/10 px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
           />
           <button
             onClick={handleSend}

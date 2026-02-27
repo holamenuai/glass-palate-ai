@@ -31,8 +31,8 @@ const SearchBar = ({ selectedAllergies }: Props) => {
       disabled={selectedAllergies.size === 0}
       className={`flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm transition-all ${
         selectedAllergies.size > 0
-          ? 'glass-button-solid'
-          : 'glass-button text-foreground/40 cursor-not-allowed'
+        ? 'glass-button-solid glass-blue-glow'
+        : 'glass-button text-foreground/40 cursor-not-allowed'
       }`}
     >
       <Search className="h-4 w-4" />

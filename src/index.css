@@ -24,8 +24,15 @@
     --muted: 0 0% 80%;
     --muted-foreground: 0 0% 70%;
 
-    --accent: 24 80% 55%;
+    --accent: 213 100% 40%;
     --accent-foreground: 0 0% 100%;
+
+    /* Blue interaction tokens */
+    --blue-accent: 213 100% 40%;
+    --blue-glow: 213 100% 50%;
+    --blue-bg: 213 100% 40% / 0.25;
+    --blue-border: 213 100% 50% / 0.5;
+    --blue-solid: 213 100% 40% / 0.85;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
@@ -109,6 +116,22 @@
 
   .glass-button-solid:hover {
     background: hsla(0 0% 100% / 1);
+  }
+
+  .glass-blue-active {
+    background: hsla(var(--blue-solid));
+    border: 1px solid hsla(var(--blue-border));
+    box-shadow: 0 0 12px hsla(var(--blue-glow) / 0.4);
+  }
+
+  .glass-blue-glow {
+    border: 1px solid hsla(var(--blue-border));
+    box-shadow: 0 0 10px hsla(var(--blue-glow) / 0.3);
+  }
+
+  .blue-input-focus:focus {
+    border-color: hsl(var(--blue-accent));
+    box-shadow: 0 0 8px hsla(var(--blue-glow) / 0.4);
   }
 
   .font-display {
