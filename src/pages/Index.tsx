@@ -4,6 +4,7 @@ import { Mic, Send } from 'lucide-react';
 import restaurantBg from '@/assets/restaurant-bg.jpg';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useChat } from '@/contexts/ChatContext';
+
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AllergySelector, { type AllergyKey } from '@/components/AllergySelector';
 import QuickAsk from '@/components/QuickAsk';
@@ -13,7 +14,7 @@ import ListeningOverlay from '@/components/ListeningOverlay';
 const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { resetChat } = useChat();
+  const { resetChat, sendAudio } = useChat();
   const [selectedAllergies, setSelectedAllergies] = useState<Set<AllergyKey>>(new Set());
   const [showListening, setShowListening] = useState(false);
 
@@ -25,10 +26,11 @@ const Index = () => {
     });
   };
 
-  const handleVoiceResult = (transcript: string) => {
+  const handleVoiceResult = (audioBlob: Blob) => {
     setShowListening(false);
     resetChat();
-    navigate(`/chat?message=${encodeURIComponent(transcript)}`);
+    sendAudio(audioBlob);
+    navigate('/chat');
   };
 
   const handleWrite = () => {
