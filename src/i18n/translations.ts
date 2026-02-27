@@ -40,6 +40,14 @@ type TranslationKeys = {
   sulphites: string;
   lupin: string;
   molluscs: string;
+  // Query phrase templates
+  queryVeggiePrefix: string;
+  queryVeggieStandalone: string;
+  queryVibePrefix: string;
+  queryVibeStandalone: string;
+  queryVeganPrefix: string;
+  queryVeganStandalone: string;
+  queryAllergyOnly: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -61,6 +69,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Gluten', crustaceans: 'Crustaceans', eggs: 'Eggs', fish: 'Fish', peanuts: 'Peanuts',
     soy: 'Soy', dairy: 'Dairy', nuts: 'Nuts', celery: 'Celery', mustard: 'Mustard',
     sesame: 'Sesame', sulphites: 'Sulphites', lupin: 'Lupin', molluscs: 'Molluscs',
+    queryVeggiePrefix: 'Show me vegetarian dishes that are also free from:',
+    queryVeggieStandalone: 'Show me vegetarian options from the menu.',
+    queryVibePrefix: 'Show me popular dishes that are also free from:',
+    queryVibeStandalone: 'Help me find my vibe.',
+    queryVeganPrefix: 'Show me vegan dishes that are also free from:',
+    queryVeganStandalone: 'Show me vegan options from the menu.',
+    queryAllergyOnly: 'I am allergic to {allergies}. Based on the menu, what can I safely eat?',
   },
   es: {
     title: 'Franco Manca',
@@ -80,6 +95,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Gluten', crustaceans: 'Crustáceos', eggs: 'Huevos', fish: 'Pescado', peanuts: 'Cacahuetes',
     soy: 'Soja', dairy: 'Lácteos', nuts: 'Frutos secos', celery: 'Apio', mustard: 'Mostaza',
     sesame: 'Sésamo', sulphites: 'Sulfitos', lupin: 'Altramuz', molluscs: 'Moluscos',
+    queryVeggiePrefix: 'Muéstrame platos vegetarianos que también estén libres de:',
+    queryVeggieStandalone: 'Muéstrame opciones vegetarianas del menú.',
+    queryVibePrefix: 'Muéstrame platos populares que también estén libres de:',
+    queryVibeStandalone: 'Ayúdame a encontrar mi estilo.',
+    queryVeganPrefix: 'Muéstrame platos veganos que también estén libres de:',
+    queryVeganStandalone: 'Muéstrame opciones veganas del menú.',
+    queryAllergyOnly: 'Soy alérgico a {allergies}. Según el menú, ¿qué puedo comer de forma segura?',
   },
   fr: {
     title: 'Franco Manca',
@@ -99,6 +121,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Gluten', crustaceans: 'Crustacés', eggs: 'Œufs', fish: 'Poisson', peanuts: 'Arachides',
     soy: 'Soja', dairy: 'Laitier', nuts: 'Noix', celery: 'Céleri', mustard: 'Moutarde',
     sesame: 'Sésame', sulphites: 'Sulfites', lupin: 'Lupin', molluscs: 'Mollusques',
+    queryVeggiePrefix: 'Montrez-moi des plats végétariens qui sont aussi sans:',
+    queryVeggieStandalone: 'Montrez-moi les options végétariennes du menu.',
+    queryVibePrefix: 'Montrez-moi des plats populaires qui sont aussi sans:',
+    queryVibeStandalone: 'Aidez-moi à trouver mon style.',
+    queryVeganPrefix: 'Montrez-moi des plats végétaliens qui sont aussi sans:',
+    queryVeganStandalone: 'Montrez-moi les options végétaliennes du menu.',
+    queryAllergyOnly: 'Je suis allergique à {allergies}. D\'après le menu, que puis-je manger en toute sécurité?',
   },
   de: {
     title: 'Franco Manca',
@@ -118,6 +147,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Gluten', crustaceans: 'Krebstiere', eggs: 'Eier', fish: 'Fisch', peanuts: 'Erdnüsse',
     soy: 'Soja', dairy: 'Milch', nuts: 'Nüsse', celery: 'Sellerie', mustard: 'Senf',
     sesame: 'Sesam', sulphites: 'Sulfite', lupin: 'Lupine', molluscs: 'Weichtiere',
+    queryVeggiePrefix: 'Zeig mir vegetarische Gerichte, die auch frei von:',
+    queryVeggieStandalone: 'Zeig mir vegetarische Optionen aus der Speisekarte.',
+    queryVibePrefix: 'Zeig mir beliebte Gerichte, die auch frei von:',
+    queryVibeStandalone: 'Hilf mir, meinen Stil zu finden.',
+    queryVeganPrefix: 'Zeig mir vegane Gerichte, die auch frei von:',
+    queryVeganStandalone: 'Zeig mir vegane Optionen aus der Speisekarte.',
+    queryAllergyOnly: 'Ich bin allergisch gegen {allergies}. Was kann ich laut Speisekarte sicher essen?',
   },
   it: {
     title: 'Franco Manca',
@@ -137,6 +173,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Glutine', crustaceans: 'Crostacei', eggs: 'Uova', fish: 'Pesce', peanuts: 'Arachidi',
     soy: 'Soia', dairy: 'Latticini', nuts: 'Frutta a guscio', celery: 'Sedano', mustard: 'Senape',
     sesame: 'Sesamo', sulphites: 'Solfiti', lupin: 'Lupino', molluscs: 'Molluschi',
+    queryVeggiePrefix: 'Mostrami piatti vegetariani che siano anche privi di:',
+    queryVeggieStandalone: 'Mostrami le opzioni vegetariane dal menu.',
+    queryVibePrefix: 'Mostrami piatti popolari che siano anche privi di:',
+    queryVibeStandalone: 'Aiutami a trovare il mio stile.',
+    queryVeganPrefix: 'Mostrami piatti vegani che siano anche privi di:',
+    queryVeganStandalone: 'Mostrami le opzioni vegane dal menu.',
+    queryAllergyOnly: 'Sono allergico a {allergies}. In base al menu, cosa posso mangiare in sicurezza?',
   },
   zh: {
     title: 'Franco Manca',
@@ -156,6 +199,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: '麸质', crustaceans: '甲壳类', eggs: '鸡蛋', fish: '鱼', peanuts: '花生',
     soy: '大豆', dairy: '乳制品', nuts: '坚果', celery: '芹菜', mustard: '芥末',
     sesame: '芝麻', sulphites: '亚硫酸盐', lupin: '羽扇豆', molluscs: '软体动物',
+    queryVeggiePrefix: '请展示不含以下成分的素食菜品：',
+    queryVeggieStandalone: '请展示菜单中的素食选项。',
+    queryVibePrefix: '请展示不含以下成分的热门菜品：',
+    queryVibeStandalone: '帮我找到适合我的风格。',
+    queryVeganPrefix: '请展示不含以下成分的纯素菜品：',
+    queryVeganStandalone: '请展示菜单中的纯素选项。',
+    queryAllergyOnly: '我对{allergies}过敏。根据菜单，我可以安全地吃什么？',
   },
   ar: {
     title: 'Franco Manca',
@@ -175,6 +225,13 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'غلوتين', crustaceans: 'قشريات', eggs: 'بيض', fish: 'سمك', peanuts: 'فول سوداني',
     soy: 'صويا', dairy: 'ألبان', nuts: 'مكسرات', celery: 'كرفس', mustard: 'خردل',
     sesame: 'سمسم', sulphites: 'كبريتات', lupin: 'ترمس', molluscs: 'رخويات',
+    queryVeggiePrefix: 'أرني أطباقاً نباتية خالية أيضاً من:',
+    queryVeggieStandalone: 'أرني الخيارات النباتية من القائمة.',
+    queryVibePrefix: 'أرني أطباقاً شائعة خالية أيضاً من:',
+    queryVibeStandalone: 'ساعدني في إيجاد أسلوبي.',
+    queryVeganPrefix: 'أرني أطباقاً نباتية صرفة خالية أيضاً من:',
+    queryVeganStandalone: 'أرني الخيارات النباتية الصرفة من القائمة.',
+    queryAllergyOnly: 'أنا أعاني من حساسية تجاه {allergies}. بناءً على القائمة، ماذا يمكنني أن آكل بأمان؟',
   },
   pl: {
     title: 'Franco Manca',
@@ -194,5 +251,12 @@ export const translations: Record<Language, TranslationKeys> = {
     gluten: 'Gluten', crustaceans: 'Skorupiaki', eggs: 'Jajka', fish: 'Ryby', peanuts: 'Orzeszki',
     soy: 'Soja', dairy: 'Nabiał', nuts: 'Orzechy', celery: 'Seler', mustard: 'Musztarda',
     sesame: 'Sezam', sulphites: 'Siarczyny', lupin: 'Łubin', molluscs: 'Mięczaki',
+    queryVeggiePrefix: 'Pokaż mi dania wegetariańskie, które są również wolne od:',
+    queryVeggieStandalone: 'Pokaż mi opcje wegetariańskie z menu.',
+    queryVibePrefix: 'Pokaż mi popularne dania, które są również wolne od:',
+    queryVibeStandalone: 'Pomóż mi znaleźć mój styl.',
+    queryVeganPrefix: 'Pokaż mi dania wegańskie, które są również wolne od:',
+    queryVeganStandalone: 'Pokaż mi opcje wegańskie z menu.',
+    queryAllergyOnly: 'Mam alergię na {allergies}. Na podstawie menu, co mogę bezpiecznie zjeść?',
   },
 };
