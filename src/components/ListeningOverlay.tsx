@@ -3,51 +3,69 @@ import { X } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 type Props = {
-  onResult: (transcript: string) => void;
+  onResult: (audioBlob: Blob) => void;
   onClose: () => void;
 };
 
 const ListeningOverlay = ({ onResult, onClose }: Props) => {
   const { t } = useLanguage();
   const [status, setStatus] = useState<'listening' | 'processing'>('listening');
-  const recognitionRef = useRef<any>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
 
   const stop = useCallback(() => {
-    recognitionRef.current?.stop();
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+    }
   }, []);
 
   useEffect(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert('Speech recognition is not supported in this browser. Try Chrome or Edge.');
-      onClose();
-      return;
-    }
+    let cancelled = false;
 
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-    recognitionRef.current = recognition;
+    const startRecording = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+        mediaRecorderRef.current = mediaRecorder;
+        chunksRef.current = [];
 
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      setStatus('processing');
-      setTimeout(() => onResult(transcript), 400);
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) chunksRef.current.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          stream.getTracks().forEach(track => track.stop());
+          if (cancelled) return;
+          const audioBlob = new Blob(chunksRef.current, { type: 'audio/webm' });
+          if (audioBlob.size > 0) {
+            setStatus('processing');
+            setTimeout(() => onResult(audioBlob), 400);
+          } else {
+            onClose();
+          }
+        };
+
+        mediaRecorder.onerror = () => {
+          stream.getTracks().forEach(track => track.stop());
+          if (!cancelled) onClose();
+        };
+
+        mediaRecorder.start();
+      } catch (err) {
+        console.error('Microphone access error:', err);
+        alert('Could not access microphone. Please allow microphone permissions.');
+        if (!cancelled) onClose();
+      }
     };
 
-    recognition.onerror = (event: any) => {
-      console.error('Speech recognition error:', event.error);
-      if (event.error !== 'aborted') onClose();
-    };
+    startRecording();
 
-    recognition.onend = () => {
-      // If no result was captured, close
-      if (status === 'listening') onClose();
+    return () => {
+      cancelled = true;
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        mediaRecorderRef.current.stop();
+      }
     };
-
-    recognition.start();
-    return () => recognition.abort();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -59,6 +77,16 @@ const ListeningOverlay = ({ onResult, onClose }: Props) => {
       <p className="mb-8 text-2xl font-bold text-foreground">
         {status === 'listening' ? (t('speak') + '...') : 'Processing...'}
       </p>
+
+      {/* Stop recording button */}
+      {status === 'listening' && (
+        <button
+          onClick={stop}
+          className="mb-8 h-20 w-20 rounded-full bg-red-500/80 flex items-center justify-center hover:bg-red-500 transition-colors"
+        >
+          <div className="h-8 w-8 rounded-sm bg-white" />
+        </button>
+      )}
 
       {/* Waveform animation */}
       <div className="flex items-center gap-1.5">
