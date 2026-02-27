@@ -24,10 +24,10 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const sessionIdRef = useRef<string>(crypto.randomUUID());
 
-  const callApi = useCallback(async (formData: FormData): Promise<string> => {
+  const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string }> => {
     formData.append('session_id', sessionIdRef.current);
 
-    const response = await fetch(API_URL, {
+    const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'X-API-KEY': API_KEY,
@@ -35,12 +35,15 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       body: formData,
     });
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
     }
 
-    const data = await response.json();
-    return data.response || data.message || data.answer || JSON.stringify(data);
+    const data = await res.json();
+    return {
+      response: data.response || data.message || data.answer || JSON.stringify(data),
+      transcript: data.transcript,
+    };
   }, []);
 
   const sendMessage = useCallback(async (text: string) => {
@@ -51,8 +54,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     try {
       const formData = new FormData();
       formData.append('text_input', text);
-      const reply = await callApi(formData);
-      const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: reply };
+      const { response } = await callApi(formData);
+      const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
     } catch (error) {
       console.error('Chat API error:', error);
@@ -67,23 +70,34 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }, [callApi]);
 
   const sendAudio = useCallback(async (audioBlob: Blob) => {
-    const userMsg: Message = { id: crypto.randomUUID(), role: 'user', content: '🎤 Voice message' };
+    const userMsg: Message = { id: crypto.randomUUID(), role: 'user', content: '🎤 Transcribing...' };
     setMessages(prev => [...prev, userMsg]);
     setIsLoading(true);
 
     try {
       const formData = new FormData();
       formData.append('file', audioBlob, 'recording.webm');
-      const reply = await callApi(formData);
-      const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: reply };
+      const { response, transcript } = await callApi(formData);
+
+      // Replace placeholder with actual transcribed text
+      if (transcript) {
+        setMessages(prev => prev.map(m =>
+          m.id === userMsg.id ? { ...m, content: transcript } : m
+        ));
+      }
+
+      const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
     } catch (error) {
       console.error('Chat API error:', error);
-      setMessages(prev => [...prev, {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
-      }]);
+      setMessages(prev => [
+        ...prev.map(m => m.id === userMsg.id ? { ...m, content: '🎤 Voice message' } : m),
+        {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: 'Sorry, I encountered an error. Please try again.',
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }

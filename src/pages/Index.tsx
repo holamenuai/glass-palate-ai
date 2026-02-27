@@ -68,7 +68,8 @@ const Index = () => {
           <div className="mb-5 grid grid-cols-2 gap-3">
             <button
               onClick={() => setShowListening(true)}
-              className="glass-button-solid flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold"
+              className="flex items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-white"
+              style={{ backgroundColor: 'hsl(213, 100%, 40%)' }}
             >
               <Mic className="h-4 w-4" />
               {t('speak')}
