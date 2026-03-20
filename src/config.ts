@@ -11,7 +11,7 @@ export const CONFIG = {
   API_KEY: "j.vSH4Q4(829)",
 
   /** Restaurant display name (used in headers, titles, etc.) */
-  RESTAURANT_NAME: "Pizza",
+  RESTAURANT_NAME: "Giuseppe's Kitchen",
 
   /** Background image for the app */
   BACKGROUND_IMAGE: restaurantBg,
