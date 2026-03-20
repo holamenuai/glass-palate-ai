@@ -1,11 +1,13 @@
 import { useLanguage } from '@/i18n/LanguageContext';
 
-type AllergyKey = 'gluten' | 'crustaceans' | 'eggs' | 'fish' | 'peanuts' | 'soy' | 'dairy' | 'nuts' | 'celery' | 'mustard' | 'sesame' | 'sulphites' | 'lupin' | 'molluscs';
+type AllergyKey = 'gluten' | 'treeNuts' | 'garlicOnions' | 'soy' | 'sesame';
 
 const allergyEmojis: Record<AllergyKey, string> = {
-  gluten: '🌾', crustaceans: '🦐', eggs: '🥚', fish: '🐟', peanuts: '🥜',
-  soy: '🌱', dairy: '🥛', nuts: '🌰', celery: '🥬', mustard: '🟡',
-  sesame: '🫘', sulphites: '🍷', lupin: '💜', molluscs: '🦑',
+  gluten: '🌾',
+  treeNuts: '🌰',
+  garlicOnions: '🧄',
+  soy: '🌱',
+  sesame: '🫘',
 };
 
 const allergyKeys: AllergyKey[] = Object.keys(allergyEmojis) as AllergyKey[];
