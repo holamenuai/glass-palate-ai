@@ -59,7 +59,7 @@ const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {
       disabled={!hasSelection}
       className={`flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm transition-all ${
         hasSelection
-        ? 'glass-button-solid glass-blue-glow'
+        ? 'glass-button-solid glass-red-glow'
         : 'glass-button text-foreground/40 cursor-not-allowed'
       }`}
     >

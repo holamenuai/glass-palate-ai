@@ -19,7 +19,6 @@ const Chat = () => {
   const seenMsgIds = useRef<Set<string>>(new Set());
   const [animatingIds, setAnimatingIds] = useState<Set<string>>(new Set());
 
-  // Mark messages for animation
   useEffect(() => {
     messages.forEach((msg) => {
       if (!seenMsgIds.current.has(msg.id)) {
@@ -37,7 +36,6 @@ const Chat = () => {
     });
   }, []);
 
-  // Auto-scroll
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, isLoading, animatingIds]);
@@ -74,7 +72,6 @@ const Chat = () => {
       </div>
 
       {isWriteMode ? (
-        /* Compact pre-chat card for Write button */
         <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col items-center justify-center px-5 py-5 transition-all duration-500 ease-out" style={{ maxHeight: 'min(40vh, 180px)' }}>
           <h2 className="mb-3 text-center text-sm font-bold text-foreground">
             {t('howCanIHelp')}
@@ -87,7 +84,7 @@ const Chat = () => {
               onKeyDown={(e) => e.key === 'Enter' && handlePreChatSend()}
               placeholder={t('write') + '...'}
               autoFocus
-              className="flex-1 rounded-full bg-foreground/10 px-4 py-2 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+              className="flex-1 rounded-full bg-foreground/10 px-4 py-2 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 red-input-focus transition-all"
             />
             <button
               onClick={handlePreChatSend}
@@ -99,33 +96,21 @@ const Chat = () => {
           </div>
         </div>
       ) : (
-        /* Full chat conversation – grows with content, capped height */
         <div className="glass-strong w-[90%] max-w-[450px] rounded-3xl flex flex-col transition-all duration-500 ease-out" style={{ height: 'min(65vh, 500px)' }}>
-          {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
             {messages.map((msg) => {
               const shouldAnimate = animatingIds.has(msg.id);
-
               return (
-                <div
-                  key={msg.id}
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                      msg.role === 'user'
-                        ? 'glass-blue-active text-foreground'
-                        : 'glass text-foreground'
-                    }`}
-                  >
+                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    msg.role === 'user'
+                      ? 'glass-red-active text-foreground'
+                      : 'glass text-foreground'
+                  }`}>
                     {msg.role === 'assistant' ? (
                       shouldAnimate ? (
                         <div className="prose prose-sm prose-invert max-w-none">
-                          <TypewriterText
-                            text={msg.content}
-                            speed={10}
-                            onComplete={() => handleAnimationComplete(msg.id)}
-                          />
+                          <TypewriterText text={msg.content} speed={10} onComplete={() => handleAnimationComplete(msg.id)} />
                         </div>
                       ) : (
                         <div className="prose prose-sm prose-invert max-w-none">
@@ -133,11 +118,7 @@ const Chat = () => {
                         </div>
                       )
                     ) : shouldAnimate ? (
-                      <TypewriterText
-                        text={msg.content}
-                        speed={15}
-                        onComplete={() => handleAnimationComplete(msg.id)}
-                      />
+                      <TypewriterText text={msg.content} speed={15} onComplete={() => handleAnimationComplete(msg.id)} />
                     ) : (
                       msg.content
                     )}
@@ -158,7 +139,6 @@ const Chat = () => {
             )}
           </div>
 
-          {/* Input */}
           <div className="border-t border-foreground/10 px-4 py-2.5">
             <div className="flex items-center gap-2">
               <input
@@ -167,7 +147,7 @@ const Chat = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder={t('write') + '...'}
-                className="flex-1 rounded-full bg-foreground/10 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 blue-input-focus transition-all"
+                className="flex-1 rounded-full bg-foreground/10 px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40 outline-none border border-foreground/10 red-input-focus transition-all"
               />
               <button
                 onClick={handleSend}
