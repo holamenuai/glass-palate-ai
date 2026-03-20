@@ -14,9 +14,9 @@ type Props = {
 };
 
 const quickAskTranslationKeys: Record<QuickAskKey, { prefix: TKey; standalone: TKey }> = {
-  veggie: { prefix: 'queryVeggiePrefix', standalone: 'queryVeggieStandalone' },
-  findMyVibe: { prefix: 'queryVibePrefix', standalone: 'queryVibeStandalone' },
-  vegan: { prefix: 'queryVeganPrefix', standalone: 'queryVeganStandalone' },
+  fillingDish: { prefix: 'queryFillingDishPrefix', standalone: 'queryFillingDishStandalone' },
+  tiramisuToday: { prefix: 'queryTiramisuPrefix', standalone: 'queryTiramisuStandalone' },
+  pastaPairing: { prefix: 'queryPastaPairingPrefix', standalone: 'queryPastaPairingStandalone' },
 };
 
 const SearchBar = ({ selectedAllergies, selectedQuickAsks }: Props) => {

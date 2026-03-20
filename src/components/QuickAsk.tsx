@@ -1,11 +1,11 @@
 import { useLanguage } from '@/i18n/LanguageContext';
 
-export type QuickAskKey = 'veggie' | 'findMyVibe' | 'vegan';
+export type QuickAskKey = 'fillingDish' | 'tiramisuToday' | 'pastaPairing';
 
 const quickOptions: { key: QuickAskKey; emoji: string }[] = [
-  { key: 'veggie', emoji: '🥕' },
-  { key: 'findMyVibe', emoji: '🍸' },
-  { key: 'vegan', emoji: '🌿' },
+  { key: 'fillingDish', emoji: '💪' },
+  { key: 'tiramisuToday', emoji: '🍰' },
+  { key: 'pastaPairing', emoji: '🍝' },
 ];
 
 type Props = {
