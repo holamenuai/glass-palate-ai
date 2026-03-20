@@ -39,7 +39,6 @@ const Index = () => {
     navigate('/chat?mode=write');
   };
 
-
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-auto">
       {/* Background */}
@@ -50,11 +49,11 @@ const Index = () => {
 
       {/* Content */}
       <div className="flex w-[90%] max-w-[450px] flex-col items-center py-6">
-        <h1 className="font-display text-4xl font-black text-foreground drop-shadow-lg">
+        <h1 className="font-display text-5xl font-black text-foreground drop-shadow-lg">
           {CONFIG.RESTAURANT_NAME}
         </h1>
-        <p className="mt-2 max-w-xs text-center text-xs leading-relaxed text-foreground/70">
-          {t('subtitle')}
+        <p className="mt-2 max-w-xs text-center text-sm font-medium tracking-wide text-foreground/60">
+          Your AI Pasta Sommelier
         </p>
 
         <div className="mt-4">
@@ -69,8 +68,7 @@ const Index = () => {
           <div className="mb-4 grid grid-cols-2 gap-2">
             <button
               onClick={() => setShowListening(true)}
-              className="flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-white"
-              style={{ backgroundColor: 'hsl(213, 100%, 40%)' }}
+              className="flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
             >
               <Mic className="h-4 w-4" />
               {t('speak')}
