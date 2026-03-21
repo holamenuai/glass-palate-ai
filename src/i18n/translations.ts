@@ -202,6 +202,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: '我能帮您什么？',
     speak: '语音',
     write: '文字',
+    startChatting: '询问AI',
     selectAllergies: '选择过敏原',
     quickAsk: '快速提问',
     gluten: '麸质',
