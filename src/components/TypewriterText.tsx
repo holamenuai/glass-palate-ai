@@ -11,6 +11,9 @@ type Props = {
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
+/** Adjust this value (150–300) to control how smooth vs. fast the markdown typing feels */
+const MARKDOWN_BUFFER_MS = 200;
+
 const hasUnclosedMarkdown = (value: string) => {
   const cleaned = value.replace(/\\./g, '').replace(/```[\s\S]*?```/g, '');
 
@@ -71,7 +74,7 @@ const TypewriterText = ({ text, speed = 12, bufferMs, onComplete, markdown = fal
   }, [onComplete]);
 
   useEffect(() => {
-    const renderDelay = clamp(bufferMs ?? speed * 16, 150, 300);
+    const renderDelay = clamp(bufferMs ?? (markdown ? MARKDOWN_BUFFER_MS : speed * 16), 150, 300);
     const chunkSize = Math.max(3, Math.round(renderDelay / 45));
 
     setDisplayed('');
