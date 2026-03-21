@@ -22,7 +22,19 @@ const Index = () => {
   const toggleAllergy = (key: AllergyKey) => {
     setSelectedAllergies((prev) => {
       const next = new Set(prev);
-      next.has(key) ? next.delete(key) : next.add(key);
+      if (next.has(key)) {
+        next.delete(key);
+      } else if (next.size < 2) {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
+  const toggleQuickAsk = (key: QuickAskKey) => {
+    setSelectedQuickAsks((prev) => {
+      const next = new Set<QuickAskKey>();
+      if (!prev.has(key)) next.add(key);
       return next;
     });
   };
