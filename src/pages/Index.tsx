@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mic, Send } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { CONFIG } from '@/config';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useChat } from '@/contexts/ChatContext';
@@ -9,15 +9,14 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AllergySelector, { type AllergyKey } from '@/components/AllergySelector';
 import QuickAsk, { type QuickAskKey } from '@/components/QuickAsk';
 import SearchBar from '@/components/SearchBar';
-import ListeningOverlay from '@/components/ListeningOverlay';
+
 
 const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { resetChat, sendAudio } = useChat();
+  const { resetChat } = useChat();
   const [selectedAllergies, setSelectedAllergies] = useState<Set<AllergyKey>>(new Set());
   const [selectedQuickAsks, setSelectedQuickAsks] = useState<Set<QuickAskKey>>(new Set());
-  const [showListening, setShowListening] = useState(false);
 
   const toggleAllergy = (key: AllergyKey) => {
     setSelectedAllergies((prev) => {
@@ -39,12 +38,6 @@ const Index = () => {
     });
   };
 
-  const handleVoiceResult = (audioBlob: Blob) => {
-    setShowListening(false);
-    resetChat();
-    sendAudio(audioBlob);
-    navigate('/chat');
-  };
 
   const handleWrite = () => {
     resetChat();
@@ -83,20 +76,13 @@ const Index = () => {
             {t('howCanIHelp')}
           </h2>
 
-          <div className="mb-4 grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setShowListening(true)}
-              className="flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
-            >
-              <Mic className="h-4 w-4" />
-              {t('speak')}
-            </button>
+          <div className="mb-4">
             <button
               onClick={handleWrite}
-              className="glass-button flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-foreground"
+              className="flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
             >
-              <Send className="h-4 w-4" />
-              {t('write')}
+              <MessageCircle className="h-4 w-4" />
+              {t('startChatting')}
             </button>
           </div>
 
@@ -127,12 +113,6 @@ const Index = () => {
         </p>
       </div>
 
-      {showListening && (
-        <ListeningOverlay
-          onResult={handleVoiceResult}
-          onClose={() => setShowListening(false)}
-        />
-      )}
     </div>
   );
 };

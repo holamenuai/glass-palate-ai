@@ -17,6 +17,7 @@ type TranslationKeys = {
   howCanIHelp: string;
   speak: string;
   write: string;
+  startChatting: string;
   selectAllergies: string;
   quickAsk: string;
   // Allergy keys
@@ -51,6 +52,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'How can I help you?',
     speak: 'Speak',
     write: 'Write',
+    startChatting: "Ask Giuseppe's AI",
     selectAllergies: 'SELECT ALLERGIES',
     quickAsk: 'QUICK ASK',
     gluten: 'Gluten',
@@ -80,6 +82,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: '¿Cómo puedo ayudarte?',
     speak: 'Hablar',
     write: 'Escribir',
+    startChatting: 'Pregunta a la IA',
     selectAllergies: 'SELECCIONAR ALERGIAS',
     quickAsk: 'PREGUNTA RÁPIDA',
     gluten: 'Gluten',
@@ -109,6 +112,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'Comment puis-je vous aider ?',
     speak: 'Parler',
     write: 'Écrire',
+    startChatting: "Demandez à l'IA",
     selectAllergies: 'SÉLECTIONNER LES ALLERGIES',
     quickAsk: 'QUESTION RAPIDE',
     gluten: 'Gluten',
@@ -138,6 +142,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'Wie kann ich Ihnen helfen?',
     speak: 'Sprechen',
     write: 'Schreiben',
+    startChatting: 'KI fragen',
     selectAllergies: 'ALLERGIEN AUSWÄHLEN',
     quickAsk: 'SCHNELLE FRAGE',
     gluten: 'Gluten',
@@ -167,6 +172,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'Come posso aiutarti?',
     speak: 'Parla',
     write: 'Scrivi',
+    startChatting: "Chiedi all'IA",
     selectAllergies: 'SELEZIONA ALLERGIE',
     quickAsk: 'DOMANDA RAPIDA',
     gluten: 'Glutine',
@@ -196,6 +202,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: '我能帮您什么？',
     speak: '语音',
     write: '文字',
+    startChatting: '询问AI',
     selectAllergies: '选择过敏原',
     quickAsk: '快速提问',
     gluten: '麸质',
@@ -225,6 +232,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'كيف يمكنني مساعدتك؟',
     speak: 'تحدث',
     write: 'اكتب',
+    startChatting: 'اسأل الذكاء الاصطناعي',
     selectAllergies: 'اختر الحساسية',
     quickAsk: 'سؤال سريع',
     gluten: 'غلوتين',
@@ -254,6 +262,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'Jak mogę Ci pomóc?',
     speak: 'Mów',
     write: 'Pisz',
+    startChatting: 'Zapytaj AI',
     selectAllergies: 'WYBIERZ ALERGIE',
     quickAsk: 'SZYBKIE PYTANIE',
     gluten: 'Gluten',
