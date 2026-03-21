@@ -83,20 +83,13 @@ const Index = () => {
             {t('howCanIHelp')}
           </h2>
 
-          <div className="mb-4 grid grid-cols-2 gap-2">
-            <button
-              onClick={() => setShowListening(true)}
-              className="flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
-            >
-              <Mic className="h-4 w-4" />
-              {t('speak')}
-            </button>
+          <div className="mb-4">
             <button
               onClick={handleWrite}
-              className="glass-button flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-foreground"
+              className="flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
             >
-              <Send className="h-4 w-4" />
-              {t('write')}
+              <MessageCircle className="h-4 w-4" />
+              {t('startChatting')}
             </button>
           </div>
 
