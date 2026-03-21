@@ -102,18 +102,18 @@ const Chat = () => {
               const shouldAnimate = animatingIds.has(msg.id);
               return (
                 <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-words ${
                     msg.role === 'user'
                       ? 'glass-red-active text-foreground'
                       : 'glass text-foreground'
                   }`}>
                     {msg.role === 'assistant' ? (
                       shouldAnimate ? (
-                        <div className="prose prose-sm prose-invert max-w-none">
+                        <div className="prose prose-sm prose-invert max-w-none whitespace-pre-wrap break-words transition-opacity duration-200 ease-out">
                           <TypewriterText text={msg.content} speed={10} markdown onComplete={() => handleAnimationComplete(msg.id)} />
                         </div>
                       ) : (
-                        <div className="prose prose-sm prose-invert max-w-none">
+                        <div className="prose prose-sm prose-invert max-w-none whitespace-pre-wrap break-words transition-opacity duration-200 ease-out">
                           <ReactMarkdown>{msg.content}</ReactMarkdown>
                         </div>
                       )
