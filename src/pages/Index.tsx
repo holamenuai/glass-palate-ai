@@ -14,10 +14,9 @@ import SearchBar from '@/components/SearchBar';
 const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const { resetChat, sendAudio } = useChat();
+  const { resetChat } = useChat();
   const [selectedAllergies, setSelectedAllergies] = useState<Set<AllergyKey>>(new Set());
   const [selectedQuickAsks, setSelectedQuickAsks] = useState<Set<QuickAskKey>>(new Set());
-  const [showListening, setShowListening] = useState(false);
 
   const toggleAllergy = (key: AllergyKey) => {
     setSelectedAllergies((prev) => {
