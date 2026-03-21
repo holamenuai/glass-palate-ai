@@ -26,13 +26,14 @@ const QuickAsk = ({ selected, onToggle }: Props) => {
           <button
             key={opt.key}
             onClick={() => onToggle(opt.key)}
-            className={`flex flex-col items-center gap-2 rounded-xl p-3 transition-all hover:scale-105 ${
+            className={`flex flex-col items-center gap-2 rounded-xl border p-3 transition-all hover:scale-105 ${
               selected.has(opt.key)
                 ? 'glass-red-active text-foreground'
-                : 'glass-button glass-red-glow'
+                : 'glass-button border-foreground/10'
             }`}
+            style={{ borderRadius: '12px' }}
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground/10 text-2xl">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/10 text-2xl">
               {opt.emoji}
             </span>
             <span className="text-xs font-medium text-foreground/80">{t(opt.key)}</span>

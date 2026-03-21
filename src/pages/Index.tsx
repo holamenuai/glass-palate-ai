@@ -44,17 +44,23 @@ const Index = () => {
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img src={CONFIG.BACKGROUND_IMAGE} alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content */}
       <div className="flex w-[90%] max-w-[450px] flex-col items-center py-6">
-        <h1 className="font-display text-5xl font-black text-foreground drop-shadow-lg">
-          {CONFIG.RESTAURANT_NAME}
-        </h1>
-        <p className="mt-2 max-w-xs text-center text-sm font-medium tracking-wide text-foreground/60">
-          Your AI Pasta Sommelier
-        </p>
+        {/* Brand Header */}
+        <div className="flex flex-col items-center">
+          <h1 className="font-display text-6xl font-bold text-foreground drop-shadow-lg leading-none">
+            Giuseppe's
+          </h1>
+          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] uppercase text-foreground/90">
+            Kitchen
+          </p>
+          <p className="mt-2 text-center text-xs font-medium text-foreground/50 tracking-wide">
+            Your AI Dining Concierge · Plant-Based Experts
+          </p>
+        </div>
 
         <div className="mt-4">
           <LanguageSwitcher />
