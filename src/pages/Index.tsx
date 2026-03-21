@@ -113,12 +113,6 @@ const Index = () => {
         </p>
       </div>
 
-      {showListening && (
-        <ListeningOverlay
-          onResult={handleVoiceResult}
-          onClose={() => setShowListening(false)}
-        />
-      )}
     </div>
   );
 };
