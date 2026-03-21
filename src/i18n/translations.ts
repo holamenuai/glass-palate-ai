@@ -232,6 +232,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'كيف يمكنني مساعدتك؟',
     speak: 'تحدث',
     write: 'اكتب',
+    startChatting: 'اسأل الذكاء الاصطناعي',
     selectAllergies: 'اختر الحساسية',
     quickAsk: 'سؤال سريع',
     gluten: 'غلوتين',
