@@ -38,12 +38,6 @@ const Index = () => {
     });
   };
 
-  const handleVoiceResult = (audioBlob: Blob) => {
-    setShowListening(false);
-    resetChat();
-    sendAudio(audioBlob);
-    navigate('/chat');
-  };
 
   const handleWrite = () => {
     resetChat();
