@@ -9,7 +9,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import AllergySelector, { type AllergyKey } from '@/components/AllergySelector';
 import QuickAsk, { type QuickAskKey } from '@/components/QuickAsk';
 import SearchBar from '@/components/SearchBar';
-import ListeningOverlay from '@/components/ListeningOverlay';
+
 
 const Index = () => {
   const { t } = useLanguage();
