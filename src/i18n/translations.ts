@@ -172,6 +172,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'Come posso aiutarti?',
     speak: 'Parla',
     write: 'Scrivi',
+    startChatting: "Chiedi all'IA",
     selectAllergies: 'SELEZIONA ALLERGIE',
     quickAsk: 'DOMANDA RAPIDA',
     gluten: 'Glutine',
