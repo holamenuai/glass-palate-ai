@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 type Props = {
   text: string;
   speed?: number;
   onComplete?: () => void;
+  markdown?: boolean;
 };
 
-const TypewriterText = ({ text, speed = 12, onComplete }: Props) => {
+const TypewriterText = ({ text, speed = 12, onComplete, markdown = false }: Props) => {
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
 
@@ -17,8 +19,6 @@ const TypewriterText = ({ text, speed = 12, onComplete }: Props) => {
 
     const tick = () => {
       if (i < text.length) {
-        // Advance by 1-3 chars for natural pacing
-        const chunk = text.charAt(i);
         i++;
         setDisplayed(text.slice(0, i));
         requestAnimationFrame(() => setTimeout(tick, speed));
@@ -31,6 +31,17 @@ const TypewriterText = ({ text, speed = 12, onComplete }: Props) => {
     const timer = setTimeout(tick, speed);
     return () => clearTimeout(timer);
   }, [text, speed, onComplete]);
+
+  const content = done ? text : displayed;
+
+  if (markdown) {
+    return (
+      <div className="min-h-[1.5em]">
+        <ReactMarkdown>{content}</ReactMarkdown>
+        {!done && <span className="inline-block w-0.5 h-4 bg-foreground/60 animate-pulse align-text-bottom ml-0.5" />}
+      </div>
+    );
+  }
 
   if (done) return <>{text}</>;
 
