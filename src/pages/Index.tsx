@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mic, Send } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { CONFIG } from '@/config';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useChat } from '@/contexts/ChatContext';
