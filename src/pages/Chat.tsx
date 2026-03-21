@@ -161,12 +161,17 @@ const Chat = () => {
         </div>
       )}
 
-      <p className="mt-3 pb-4 text-xs text-foreground/40">
-        {t('poweredBy')}{' '}
-        <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
-          {CONFIG.BRANDING_NAME}
-        </a>
-      </p>
+      <div className="mt-3 pb-4 text-center">
+        <p className="text-[10px] text-foreground/30 italic mb-1">
+          While we take every precaution, we cannot fully guarantee a cross-contamination-free environment.
+        </p>
+        <p className="text-xs text-foreground/40">
+          {t('poweredBy')}{' '}
+          <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
+            {CONFIG.BRANDING_NAME}
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
