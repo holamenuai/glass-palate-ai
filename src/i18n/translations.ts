@@ -17,6 +17,7 @@ type TranslationKeys = {
   howCanIHelp: string;
   speak: string;
   write: string;
+  startChatting: string;
   selectAllergies: string;
   quickAsk: string;
   // Allergy keys
