@@ -110,7 +110,7 @@ const Chat = () => {
                     {msg.role === 'assistant' ? (
                       shouldAnimate ? (
                         <div className="prose prose-sm prose-invert max-w-none">
-                          <TypewriterText text={msg.content} speed={10} onComplete={() => handleAnimationComplete(msg.id)} />
+                          <TypewriterText text={msg.content} speed={10} markdown onComplete={() => handleAnimationComplete(msg.id)} />
                         </div>
                       ) : (
                         <div className="prose prose-sm prose-invert max-w-none">
