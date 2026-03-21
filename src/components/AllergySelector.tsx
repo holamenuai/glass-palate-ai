@@ -22,6 +22,7 @@ type Props = {
 
 const AllergySelector = ({ selected = new Set(), onToggle }: Props) => {
   const { t } = useLanguage();
+  const maxReached = selected.size >= 2;
 
   return (
     <div>
@@ -29,22 +30,29 @@ const AllergySelector = ({ selected = new Set(), onToggle }: Props) => {
         {t('selectAllergies')}
       </h3>
       <div className="grid grid-cols-5 gap-1.5">
-        {allergyKeys.map((key) => (
-          <button
-            key={key}
-            onClick={() => onToggle(key)}
-            className={`flex flex-col items-center gap-1 rounded-full p-2 text-center transition-all ${
-              selected.has(key)
-                ? 'glass-red-active text-foreground'
-                : 'glass-button'
-            }`}
-          >
-            <span className="text-lg">{allergyEmojis[key]}</span>
-            <span className="text-[9px] font-medium leading-tight text-foreground/80">
-              {t(key)}
-            </span>
-          </button>
-        ))}
+        {allergyKeys.map((key) => {
+          const isSelected = selected.has(key);
+          const isDisabled = !isSelected && maxReached;
+          return (
+            <button
+              key={key}
+              onClick={() => onToggle(key)}
+              disabled={isDisabled}
+              className={`flex flex-col items-center gap-1 rounded-full p-2 text-center transition-all ${
+                isSelected
+                  ? 'glass-red-active text-foreground'
+                  : isDisabled
+                    ? 'glass-button opacity-35 cursor-not-allowed'
+                    : 'glass-button'
+              }`}
+            >
+              <span className="text-lg">{allergyEmojis[key]}</span>
+              <span className="text-[9px] font-medium leading-tight text-foreground/80">
+                {t(key)}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

@@ -107,13 +107,7 @@ const Index = () => {
           <div className="mt-3">
             <QuickAsk
               selected={selectedQuickAsks}
-              onToggle={(key) => {
-                setSelectedQuickAsks((prev) => {
-                  const next = new Set(prev);
-                  next.has(key) ? next.delete(key) : next.add(key);
-                  return next;
-                });
-              }}
+              onToggle={toggleQuickAsk}
             />
           </div>
 
