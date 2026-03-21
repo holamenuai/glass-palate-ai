@@ -122,7 +122,7 @@ const TypewriterText = ({ text, speed = 12, bufferMs, onComplete, markdown = fal
         className="min-h-[1.5em] whitespace-pre-wrap break-words transition-opacity duration-200 ease-out"
         style={{ opacity: isVisible ? 1 : 0.92 }}
       >
-        <ReactMarkdown className="whitespace-pre-wrap break-words">{content}</ReactMarkdown>
+        <ReactMarkdown>{content}</ReactMarkdown>
         {!done && <span className="inline-block w-0.5 h-4 bg-foreground/60 animate-pulse align-text-bottom ml-0.5" />}
       </div>
     );
