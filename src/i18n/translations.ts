@@ -237,7 +237,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quickAsk: 'سؤال سريع',
     gluten: 'غلوتين',
     treeNuts: 'مكسرات',
-    garlicOnions: 'ثوم وبصل',
+    garlicOnions: 'ثوم',
     soy: 'صويا',
     sesame: 'سمسم',
     fillingDish: 'الأكثر شبعاً',
