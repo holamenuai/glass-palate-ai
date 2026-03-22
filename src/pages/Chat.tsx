@@ -154,6 +154,7 @@ const Chat = () => {
             </div>
           )}
 
+          <div className="border-t border-foreground/10 px-4 py-2.5">
             <div className="flex items-center gap-2">
               <input
                 type="text"
