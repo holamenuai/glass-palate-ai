@@ -115,7 +115,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, suggestions }}>
+    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, showChips }}>
       {children}
     </ChatContext.Provider>
   );
