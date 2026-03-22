@@ -140,15 +140,15 @@ const Chat = () => {
           </div>
 
           {/* Suggestion Chips */}
-          {!isLoading && suggestions.length > 0 && aiResponseCount <= 4 && (
+          {showChips && (
             <div className="flex flex-wrap gap-1.5 px-5 pb-2 animate-fade-in">
-              {suggestions.map((suggestion, idx) => (
+              {[t('chipPairing'), t('chipYes'), t('chipNo')].map((chip, idx) => (
                 <button
                   key={idx}
-                  onClick={() => sendMessage(suggestion)}
+                  onClick={() => sendMessage(chip)}
                   className="rounded-full border border-foreground/20 bg-foreground/5 backdrop-blur-md px-2.5 py-1 text-[11px] text-foreground/80 hover:bg-foreground/15 hover:border-foreground/30 transition-all duration-200"
                 >
-                  {suggestion}
+                  {chip}
                 </button>
               ))}
             </div>

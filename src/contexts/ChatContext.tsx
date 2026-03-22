@@ -68,7 +68,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
       }]);
-      setSuggestions([]);
+      
     } finally {
       setIsLoading(false);
     }
