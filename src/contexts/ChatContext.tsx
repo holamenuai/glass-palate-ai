@@ -23,7 +23,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [aiResponseCount, setAiResponseCount] = useState(0);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const showChips = !isLoading && aiResponseCount > 0 && aiResponseCount <= 4;
   const sessionIdRef = useRef<string>(crypto.randomUUID());
 
   const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string; suggestions?: string[] }> => {
