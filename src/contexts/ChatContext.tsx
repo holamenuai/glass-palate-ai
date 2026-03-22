@@ -14,12 +14,10 @@ type ChatContextType = {
   sendAudio: (audioBlob: Blob) => Promise<void>;
   resetChat: () => void;
   aiResponseCount: number;
-  suggestions: string[];
+  showChips: boolean;
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
-
-const FIXED_CHIPS = ['What pairs well with it? 🍞', 'Yes ✅', 'No ❌'];
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
