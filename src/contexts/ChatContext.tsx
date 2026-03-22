@@ -19,17 +19,7 @@ type ChatContextType = {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-const FALLBACK_SUGGESTIONS = [
-  ['What are today\'s specials?', 'Any gluten-free options?', 'What do you recommend?'],
-  ['Tell me more about this dish', 'Any desserts available?', 'What pairs well with it?'],
-  ['Is it spicy?', 'Can I customize it?', 'What\'s most popular?'],
-  ['Any drinks to pair?', 'What\'s the portion size?', 'Anything lighter?'],
-];
-
-const generateFallbackSuggestions = (_input: string): string[] => {
-  const idx = Math.floor(Math.random() * FALLBACK_SUGGESTIONS.length);
-  return FALLBACK_SUGGESTIONS[idx];
-};
+const FIXED_CHIPS = ['What pairs well with it? 🍞', 'Yes ✅', 'No ❌'];
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
