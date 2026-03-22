@@ -64,7 +64,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       setMessages(prev => [...prev, assistantMsg]);
       setAiResponseCount(prev => {
         const next = prev + 1;
-        setSuggestions(next <= 4 ? (newSuggestions?.length ? newSuggestions : generateFallbackSuggestions(text)) : []);
+        setSuggestions(next <= 4 ? FIXED_CHIPS : []);
         return next;
       });
     } catch (error) {
