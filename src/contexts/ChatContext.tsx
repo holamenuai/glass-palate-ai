@@ -57,9 +57,14 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     try {
       const formData = new FormData();
       formData.append('text_input', text);
-      const { response } = await callApi(formData);
+      const { response, suggestions: newSuggestions } = await callApi(formData);
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
+      setAiResponseCount(prev => {
+        const next = prev + 1;
+        setSuggestions(next <= 4 ? (newSuggestions?.length ? newSuggestions : generateFallbackSuggestions(text)) : []);
+        return next;
+      });
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [...prev, {
@@ -67,6 +72,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
       }]);
+      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
