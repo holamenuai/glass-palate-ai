@@ -13,16 +13,32 @@ type ChatContextType = {
   sendMessage: (text: string) => Promise<void>;
   sendAudio: (audioBlob: Blob) => Promise<void>;
   resetChat: () => void;
+  aiResponseCount: number;
+  suggestions: string[];
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
+const FALLBACK_SUGGESTIONS = [
+  ['What are today\'s specials?', 'Any gluten-free options?', 'What do you recommend?'],
+  ['Tell me more about this dish', 'Any desserts available?', 'What pairs well with it?'],
+  ['Is it spicy?', 'Can I customize it?', 'What\'s most popular?'],
+  ['Any drinks to pair?', 'What\'s the portion size?', 'Anything lighter?'],
+];
+
+const generateFallbackSuggestions = (_input: string): string[] => {
+  const idx = Math.floor(Math.random() * FALLBACK_SUGGESTIONS.length);
+  return FALLBACK_SUGGESTIONS[idx];
+};
+
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [aiResponseCount, setAiResponseCount] = useState(0);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const sessionIdRef = useRef<string>(crypto.randomUUID());
 
-  const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string }> => {
+  const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string; suggestions?: string[] }> => {
     formData.append('session_id', sessionIdRef.current);
 
     const res = await fetch(CONFIG.BACKEND_URL, {
@@ -41,6 +57,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     return {
       response: data.response || data.message || data.answer || JSON.stringify(data),
       transcript: data.transcript,
+      suggestions: data.suggestions || [],
     };
   }, []);
 
@@ -52,9 +69,14 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     try {
       const formData = new FormData();
       formData.append('text_input', text);
-      const { response } = await callApi(formData);
+      const { response, suggestions: newSuggestions } = await callApi(formData);
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
+      setAiResponseCount(prev => {
+        const next = prev + 1;
+        setSuggestions(next <= 4 ? (newSuggestions?.length ? newSuggestions : generateFallbackSuggestions(text)) : []);
+        return next;
+      });
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [...prev, {
@@ -62,6 +84,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
       }]);
+      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
@@ -75,9 +98,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     try {
       const formData = new FormData();
       formData.append('file', audioBlob, 'recording.webm');
-      const { response, transcript } = await callApi(formData);
+      const { response, transcript, suggestions: newSuggestions } = await callApi(formData);
 
-      // Replace placeholder with actual transcribed text
       if (transcript) {
         setMessages(prev => prev.map(m =>
           m.id === userMsg.id ? { ...m, content: transcript } : m
@@ -86,6 +108,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
+      setAiResponseCount(prev => {
+        const next = prev + 1;
+        setSuggestions(next <= 4 ? (newSuggestions?.length ? newSuggestions : generateFallbackSuggestions('')) : []);
+        return next;
+      });
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [
@@ -96,6 +123,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           content: 'Sorry, I encountered an error. Please try again.',
         },
       ]);
+      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
@@ -103,11 +131,13 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
   const resetChat = useCallback(() => {
     setMessages([]);
+    setAiResponseCount(0);
+    setSuggestions([]);
     sessionIdRef.current = crypto.randomUUID();
   }, []);
 
   return (
-    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat }}>
+    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, suggestions }}>
       {children}
     </ChatContext.Provider>
   );

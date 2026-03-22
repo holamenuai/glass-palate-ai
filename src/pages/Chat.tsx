@@ -10,7 +10,7 @@ import TypewriterText from '@/components/TypewriterText';
 const Chat = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { messages, isLoading, sendMessage } = useChat();
+  const { messages, isLoading, sendMessage, aiResponseCount, suggestions } = useChat();
   const { t } = useLanguage();
   const [input, setInput] = useState('');
   const [preChatInput, setPreChatInput] = useState('');
@@ -138,6 +138,21 @@ const Chat = () => {
               </div>
             )}
           </div>
+
+          {/* Suggestion Chips */}
+          {!isLoading && suggestions.length > 0 && aiResponseCount <= 4 && (
+            <div className="flex flex-wrap gap-2 px-5 pb-2 animate-fade-in">
+              {suggestions.map((suggestion, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => sendMessage(suggestion)}
+                  className="rounded-full border border-foreground/15 bg-foreground/5 px-3 py-1.5 text-xs text-foreground/80 hover:bg-foreground/10 hover:border-foreground/25 transition-all duration-200"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="border-t border-foreground/10 px-4 py-2.5">
             <div className="flex items-center gap-2">
