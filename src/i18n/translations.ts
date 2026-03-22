@@ -210,6 +210,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Con cosa accompagno la mia pasta? Suggerisci contorni e salse.',
     queryAllergyOnly: 'Sono allergico a {allergies}. In base al menu, cosa posso mangiare in sicurezza?',
     preChatPlaceholder: 'es., è tutto plant-based?',
+    chipPairing: 'Cosa si abbina bene? 🍞',
+    chipYes: 'Sì ✅',
+    chipNo: 'No ❌',
   },
   zh: {
     title: 'Franco Manca',
