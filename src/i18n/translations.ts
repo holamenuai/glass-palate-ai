@@ -207,7 +207,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quickAsk: '快速提问',
     gluten: '麸质',
     treeNuts: '坚果',
-    garlicOnions: '大蒜和洋葱',
+    garlicOnions: '大蒜',
     soy: '大豆',
     sesame: '芝麻',
     fillingDish: '最饱腹',
