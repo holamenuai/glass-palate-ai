@@ -13,6 +13,8 @@ type ChatContextType = {
   sendMessage: (text: string) => Promise<void>;
   sendAudio: (audioBlob: Blob) => Promise<void>;
   resetChat: () => void;
+  aiResponseCount: number;
+  suggestions: string[];
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
