@@ -130,21 +130,6 @@
     box-shadow: 0 0 10px hsla(var(--red-glow) / 0.3);
   }
 
-  .glass-card-transparent {
-    background: hsla(0 0% 0% / 0.06);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 0.5px solid hsla(0 0% 100% / 0.12);
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
   .red-input-focus:focus {
     border-color: hsl(var(--red-accent));
     box-shadow: 0 0 8px hsla(var(--red-glow) / 0.4);

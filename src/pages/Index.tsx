@@ -38,83 +38,83 @@ const Index = () => {
     });
   };
 
+
   const handleWrite = () => {
     resetChat();
     navigate('/chat?mode=write');
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-auto">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-auto">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img src={CONFIG.BACKGROUND_IMAGE} alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      {/* Language switcher - top right corner */}
-      <div className="fixed right-3 top-3 z-50">
-        <LanguageSwitcher compact />
-      </div>
-
-      {/* Content - pushed to bottom on mobile, centered on desktop */}
-      <div className="mt-auto flex w-full flex-col items-center px-4 pb-4 pt-8 sm:my-auto sm:pb-6">
-        {/* Brand Header - single instance */}
-        <div className="mb-3 flex flex-col items-center sm:mb-4">
-          <h1 className="font-display text-5xl font-bold drop-shadow-lg leading-none text-destructive sm:text-6xl">
+      {/* Content */}
+      <div className="flex w-[90%] max-w-[450px] flex-col items-center py-6">
+        {/* Brand Header */}
+        <div className="flex flex-col items-center">
+          <h1 className="font-display text-6xl font-bold drop-shadow-lg leading-none text-destructive">
             Giuseppe's
           </h1>
-          <p className="font-heading mt-0.5 text-sm font-semibold tracking-[0.35em] uppercase text-destructive sm:text-lg">
+          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] uppercase text-destructive">
             Kitchen
           </p>
-          <p className="mt-1 text-center text-[10px] font-medium text-foreground/40 tracking-wider sm:text-xs">
+          <p className="mt-2 text-center text-xs font-medium text-foreground/50 tracking-wide">
             Your AI Dining Concierge · Plant-Based Experts
           </p>
         </div>
 
-        {/* Main Card - more transparent glass */}
-        <div className="glass-card-transparent w-full max-w-[450px] rounded-2xl p-3 sm:rounded-3xl sm:p-4">
-          <h2 className="mb-2 text-center text-sm font-bold text-foreground sm:mb-3 sm:text-base">
+        <div className="mt-4">
+          <LanguageSwitcher />
+        </div>
+
+        <div className="glass-strong mt-4 w-full rounded-3xl p-4">
+          <h2 className="mb-3 text-center text-base font-bold text-foreground">
             {t('howCanIHelp')}
           </h2>
 
-          {/* Start Chatting Button - slimmer on mobile */}
-          <div className="mb-3">
+          <div className="mb-4">
             <button
               onClick={handleWrite}
-              className="flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors sm:py-3">
+              className="flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors">
+              
               <MessageCircle className="h-4 w-4" />
               {t('startChatting')}
             </button>
           </div>
 
-          {/* Allergies - compact horizontal scroll on mobile */}
-          <div className="glass rounded-xl p-2 sm:rounded-2xl sm:p-3">
+          <div className="glass rounded-2xl p-3">
             <AllergySelector selected={selectedAllergies} onToggle={toggleAllergy} />
           </div>
 
-          {/* Quick Ask */}
-          <div className="mt-2 sm:mt-3">
-            <QuickAsk selected={selectedQuickAsks} onToggle={toggleQuickAsk} />
+          <div className="mt-3">
+            <QuickAsk
+              selected={selectedQuickAsks}
+              onToggle={toggleQuickAsk} />
+            
           </div>
 
-          {/* Search Bar */}
-          <div className="mt-2 sm:mt-3">
+          <div className="mt-3">
             <SearchBar selectedAllergies={selectedAllergies} selectedQuickAsks={selectedQuickAsks} />
           </div>
         </div>
 
-        <p className="mt-3 max-w-xs text-center text-[10px] leading-relaxed text-foreground/40 sm:mt-4 sm:text-[11px]">
+        <p className="mt-4 max-w-xs text-center text-[11px] leading-relaxed text-foreground/50">
           {t('disclaimer')}
         </p>
-        <p className="mt-2 text-[10px] text-foreground/30 sm:mt-3 sm:text-xs">
+        <p className="mt-3 text-xs text-foreground/40">
           {t('poweredBy')}{' '}
-          <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/50 hover:text-foreground/90 hover:underline transition-colors">
+          <a href={CONFIG.BRANDING_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-foreground/60 hover:text-foreground/90 hover:underline transition-colors">
             {CONFIG.BRANDING_NAME}
           </a>
         </p>
       </div>
-    </div>
-  );
+
+    </div>);
+
 };
 
 export default Index;
