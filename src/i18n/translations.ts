@@ -43,6 +43,9 @@ type TranslationKeys = {
   queryPastaPairingStandalone: string;
   queryAllergyOnly: string;
   preChatPlaceholder: string;
+  chipPairing: string;
+  chipYes: string;
+  chipNo: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
