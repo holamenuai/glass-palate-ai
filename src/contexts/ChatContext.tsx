@@ -107,7 +107,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           content: 'Sorry, I encountered an error. Please try again.',
         },
       ]);
-      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
