@@ -243,6 +243,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: '我的意面搭配什么好？推荐配菜和蘸酱。',
     queryAllergyOnly: '我对{allergies}过敏。根据菜单，我可以安全地吃什么？',
     preChatPlaceholder: '例如，一切都是纯植物的吗？',
+    chipPairing: '有什么好的搭配吗？ 🍞',
+    chipYes: '是的 ✅',
+    chipNo: '不是 ❌',
   },
   ar: {
     title: 'Franco Manca',
