@@ -92,11 +92,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
-      setAiResponseCount(prev => {
-        const next = prev + 1;
-        setSuggestions(next <= 4 ? FIXED_CHIPS : []);
-        return next;
-      });
+      setAiResponseCount(prev => prev + 1);
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [
