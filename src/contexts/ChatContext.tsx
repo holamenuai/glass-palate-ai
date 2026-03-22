@@ -26,7 +26,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const sessionIdRef = useRef<string>(crypto.randomUUID());
 
-  const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string }> => {
+  const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string; suggestions?: string[] }> => {
     formData.append('session_id', sessionIdRef.current);
 
     const res = await fetch(CONFIG.BACKEND_URL, {
@@ -45,6 +45,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     return {
       response: data.response || data.message || data.answer || JSON.stringify(data),
       transcript: data.transcript,
+      suggestions: data.suggestions || [],
     };
   }, []);
 
