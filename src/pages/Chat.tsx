@@ -10,7 +10,7 @@ import TypewriterText from '@/components/TypewriterText';
 const Chat = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { messages, isLoading, sendMessage } = useChat();
+  const { messages, isLoading, sendMessage, aiResponseCount, suggestions } = useChat();
   const { t } = useLanguage();
   const [input, setInput] = useState('');
   const [preChatInput, setPreChatInput] = useState('');
