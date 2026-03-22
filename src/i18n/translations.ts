@@ -78,6 +78,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'What should I pair with my pasta? Suggest sides and dips.',
     queryAllergyOnly: 'I am allergic to {allergies}. Based on the menu, what can I safely eat?',
     preChatPlaceholder: 'e.g., is everything plant-based?',
+    chipPairing: 'What pairs well with it? 🍞',
+    chipYes: 'Yes ✅',
+    chipNo: 'No ❌',
   },
   es: {
     title: 'Franco Manca',
