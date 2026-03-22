@@ -276,6 +276,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'ماذا أضيف مع الباستا؟ اقترح أطباقاً جانبية.',
     queryAllergyOnly: 'أنا أعاني من حساسية تجاه {allergies}. بناءً على القائمة، ماذا يمكنني أن آكل بأمان؟',
     preChatPlaceholder: 'مثال، هل كل شيء نباتي؟',
+    chipPairing: 'ما الذي يتماشى معه؟ 🍞',
+    chipYes: 'نعم ✅',
+    chipNo: 'لا ❌',
   },
   pl: {
     title: 'Franco Manca',
