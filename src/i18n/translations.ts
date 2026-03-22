@@ -177,6 +177,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Was passt zu meiner Pasta? Schlagen Sie Beilagen vor.',
     queryAllergyOnly: 'Ich bin allergisch gegen {allergies}. Was kann ich laut Speisekarte sicher essen?',
     preChatPlaceholder: 'z.B., ist alles pflanzlich?',
+    chipPairing: 'Was passt gut dazu? 🍞',
+    chipYes: 'Ja ✅',
+    chipNo: 'Nein ❌',
   },
   it: {
     title: 'Franco Manca',
