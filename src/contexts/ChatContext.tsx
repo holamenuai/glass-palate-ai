@@ -98,9 +98,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     try {
       const formData = new FormData();
       formData.append('file', audioBlob, 'recording.webm');
-      const { response, transcript } = await callApi(formData);
+      const { response, transcript, suggestions: newSuggestions } = await callApi(formData);
 
-      // Replace placeholder with actual transcribed text
       if (transcript) {
         setMessages(prev => prev.map(m =>
           m.id === userMsg.id ? { ...m, content: transcript } : m
@@ -109,6 +108,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
+      setAiResponseCount(prev => {
+        const next = prev + 1;
+        setSuggestions(next <= 4 ? (newSuggestions?.length ? newSuggestions : generateFallbackSuggestions('')) : []);
+        return next;
+      });
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [
@@ -119,6 +123,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           content: 'Sorry, I encountered an error. Please try again.',
         },
       ]);
+      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
@@ -126,11 +131,13 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
   const resetChat = useCallback(() => {
     setMessages([]);
+    setAiResponseCount(0);
+    setSuggestions([]);
     sessionIdRef.current = crypto.randomUUID();
   }, []);
 
   return (
-    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat }}>
+    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, suggestions }}>
       {children}
     </ChatContext.Provider>
   );
