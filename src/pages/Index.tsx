@@ -56,10 +56,10 @@ const Index = () => {
       <div className="flex w-[90%] max-w-[450px] flex-col items-center py-6">
         {/* Brand Header */}
         <div className="flex flex-col items-center">
-          <h1 className="font-display text-6xl font-bold text-foreground drop-shadow-lg leading-none">
+          <h1 className="font-display text-6xl font-bold drop-shadow-lg leading-none text-destructive">
             Giuseppe's
           </h1>
-          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] uppercase text-foreground/90">
+          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] uppercase text-destructive">
             Kitchen
           </p>
           <p className="mt-2 text-center text-xs font-medium text-foreground/50 tracking-wide">
@@ -79,8 +79,8 @@ const Index = () => {
           <div className="mb-4">
             <button
               onClick={handleWrite}
-              className="flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors"
-            >
+              className="flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-accent-foreground bg-accent hover:bg-accent/90 transition-colors">
+              
               <MessageCircle className="h-4 w-4" />
               {t('startChatting')}
             </button>
@@ -93,8 +93,8 @@ const Index = () => {
           <div className="mt-3">
             <QuickAsk
               selected={selectedQuickAsks}
-              onToggle={toggleQuickAsk}
-            />
+              onToggle={toggleQuickAsk} />
+            
           </div>
 
           <div className="mt-3">
@@ -113,9 +113,8 @@ const Index = () => {
         </p>
       </div>
 
-    </div>
-  );
+    </div>);
+
 };
 
 export default Index;
-
