@@ -309,5 +309,8 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Co dodać do makaronu? Zaproponuj dodatki i dipy.',
     queryAllergyOnly: 'Mam alergię na {allergies}. Na podstawie menu, co mogę bezpiecznie zjeść?',
     preChatPlaceholder: 'np., czy wszystko jest roślinne?',
+    chipPairing: 'Co do tego pasuje? 🍞',
+    chipYes: 'Tak ✅',
+    chipNo: 'Nie ❌',
   },
 };
