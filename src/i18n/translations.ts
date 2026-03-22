@@ -144,6 +144,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Avec quoi accompagner mes pâtes ? Suggérez des accompagnements.',
     queryAllergyOnly: 'Je suis allergique à {allergies}. D\'après le menu, que puis-je manger en toute sécurité ?',
     preChatPlaceholder: 'ex., tout est plant-based ?',
+    chipPairing: "Qu'est-ce qui l'accompagne bien ? 🍞",
+    chipYes: 'Oui ✅',
+    chipNo: 'Non ❌',
   },
   de: {
     title: 'Franco Manca',
