@@ -111,7 +111,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const resetChat = useCallback(() => {
     setMessages([]);
     setAiResponseCount(0);
-    setSuggestions([]);
     sessionIdRef.current = crypto.randomUUID();
   }, []);
 
