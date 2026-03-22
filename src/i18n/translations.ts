@@ -43,6 +43,9 @@ type TranslationKeys = {
   queryPastaPairingStandalone: string;
   queryAllergyOnly: string;
   preChatPlaceholder: string;
+  chipPairing: string;
+  chipYes: string;
+  chipNo: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -75,6 +78,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'What should I pair with my pasta? Suggest sides and dips.',
     queryAllergyOnly: 'I am allergic to {allergies}. Based on the menu, what can I safely eat?',
     preChatPlaceholder: 'e.g., is everything plant-based?',
+    chipPairing: 'What pairs well with it? 🍞',
+    chipYes: 'Yes ✅',
+    chipNo: 'No ❌',
   },
   es: {
     title: 'Franco Manca',
@@ -105,6 +111,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: '¿Con qué acompaño mi pasta? Sugiéreme acompañamientos y dips.',
     queryAllergyOnly: 'Soy alérgico a {allergies}. Según el menú, ¿qué puedo comer de forma segura?',
     preChatPlaceholder: 'ej., ¿todo es plant-based?',
+    chipPairing: '¿Qué combina bien con esto? 🍞',
+    chipYes: 'Sí ✅',
+    chipNo: 'No ❌',
   },
   fr: {
     title: 'Franco Manca',
@@ -135,6 +144,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Avec quoi accompagner mes pâtes ? Suggérez des accompagnements.',
     queryAllergyOnly: 'Je suis allergique à {allergies}. D\'après le menu, que puis-je manger en toute sécurité ?',
     preChatPlaceholder: 'ex., tout est plant-based ?',
+    chipPairing: "Qu'est-ce qui l'accompagne bien ? 🍞",
+    chipYes: 'Oui ✅',
+    chipNo: 'Non ❌',
   },
   de: {
     title: 'Franco Manca',
@@ -165,6 +177,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Was passt zu meiner Pasta? Schlagen Sie Beilagen vor.',
     queryAllergyOnly: 'Ich bin allergisch gegen {allergies}. Was kann ich laut Speisekarte sicher essen?',
     preChatPlaceholder: 'z.B., ist alles pflanzlich?',
+    chipPairing: 'Was passt gut dazu? 🍞',
+    chipYes: 'Ja ✅',
+    chipNo: 'Nein ❌',
   },
   it: {
     title: 'Franco Manca',
@@ -195,6 +210,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Con cosa accompagno la mia pasta? Suggerisci contorni e salse.',
     queryAllergyOnly: 'Sono allergico a {allergies}. In base al menu, cosa posso mangiare in sicurezza?',
     preChatPlaceholder: 'es., è tutto plant-based?',
+    chipPairing: 'Cosa si abbina bene? 🍞',
+    chipYes: 'Sì ✅',
+    chipNo: 'No ❌',
   },
   zh: {
     title: 'Franco Manca',
@@ -225,6 +243,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: '我的意面搭配什么好？推荐配菜和蘸酱。',
     queryAllergyOnly: '我对{allergies}过敏。根据菜单，我可以安全地吃什么？',
     preChatPlaceholder: '例如，一切都是纯植物的吗？',
+    chipPairing: '有什么好的搭配吗？ 🍞',
+    chipYes: '是的 ✅',
+    chipNo: '不是 ❌',
   },
   ar: {
     title: 'Franco Manca',
@@ -255,6 +276,9 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'ماذا أضيف مع الباستا؟ اقترح أطباقاً جانبية.',
     queryAllergyOnly: 'أنا أعاني من حساسية تجاه {allergies}. بناءً على القائمة، ماذا يمكنني أن آكل بأمان؟',
     preChatPlaceholder: 'مثال، هل كل شيء نباتي؟',
+    chipPairing: 'ما الذي يتماشى معه؟ 🍞',
+    chipYes: 'نعم ✅',
+    chipNo: 'لا ❌',
   },
   pl: {
     title: 'Franco Manca',
@@ -285,5 +309,8 @@ export const translations: Record<Language, TranslationKeys> = {
     queryPastaPairingStandalone: 'Co dodać do makaronu? Zaproponuj dodatki i dipy.',
     queryAllergyOnly: 'Mam alergię na {allergies}. Na podstawie menu, co mogę bezpiecznie zjeść?',
     preChatPlaceholder: 'np., czy wszystko jest roślinne?',
+    chipPairing: 'Co do tego pasuje? 🍞',
+    chipYes: 'Tak ✅',
+    chipNo: 'Nie ❌',
   },
 };

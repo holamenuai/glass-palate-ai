@@ -14,18 +14,16 @@ type ChatContextType = {
   sendAudio: (audioBlob: Blob) => Promise<void>;
   resetChat: () => void;
   aiResponseCount: number;
-  suggestions: string[];
+  showChips: boolean;
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
-
-const FIXED_CHIPS = ['What pairs well with it? 🍞', 'Yes ✅', 'No ❌'];
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [aiResponseCount, setAiResponseCount] = useState(0);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const showChips = !isLoading && aiResponseCount > 0 && aiResponseCount <= 4;
   const sessionIdRef = useRef<string>(crypto.randomUUID());
 
   const callApi = useCallback(async (formData: FormData): Promise<{ response: string; transcript?: string; suggestions?: string[] }> => {
@@ -62,11 +60,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       const { response, suggestions: newSuggestions } = await callApi(formData);
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
-      setAiResponseCount(prev => {
-        const next = prev + 1;
-        setSuggestions(next <= 4 ? FIXED_CHIPS : []);
-        return next;
-      });
+      setAiResponseCount(prev => prev + 1);
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [...prev, {
@@ -74,7 +68,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
       }]);
-      setSuggestions([]);
+      
     } finally {
       setIsLoading(false);
     }
@@ -98,11 +92,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
       const assistantMsg: Message = { id: crypto.randomUUID(), role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMsg]);
-      setAiResponseCount(prev => {
-        const next = prev + 1;
-        setSuggestions(next <= 4 ? FIXED_CHIPS : []);
-        return next;
-      });
+      setAiResponseCount(prev => prev + 1);
     } catch (error) {
       console.error('Chat API error:', error);
       setMessages(prev => [
@@ -113,7 +103,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
           content: 'Sorry, I encountered an error. Please try again.',
         },
       ]);
-      setSuggestions([]);
     } finally {
       setIsLoading(false);
     }
@@ -122,12 +111,11 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const resetChat = useCallback(() => {
     setMessages([]);
     setAiResponseCount(0);
-    setSuggestions([]);
     sessionIdRef.current = crypto.randomUUID();
   }, []);
 
   return (
-    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, suggestions }}>
+    <ChatContext.Provider value={{ messages, isLoading, sendMessage, sendAudio, resetChat, aiResponseCount, showChips }}>
       {children}
     </ChatContext.Provider>
   );
