@@ -57,9 +57,9 @@ const Index = () => {
         {/* Brand Header */}
         <div className="flex flex-col items-center">
           <h1 className="font-display text-6xl font-bold drop-shadow-lg leading-none text-destructive">
-            Vladimir
+            ​Vladimir
           </h1>
-          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] uppercase text-destructive">
+          <p className="font-heading mt-1 text-lg font-semibold tracking-[0.35em] text-destructive">
             kitchen
           </p>
           <p className="mt-2 text-center text-xs font-medium text-foreground/50 tracking-wide">
