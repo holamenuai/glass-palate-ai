@@ -25,7 +25,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ChatProvider>
-          </BrowserRouter>
+          </HashRouter>
       </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
