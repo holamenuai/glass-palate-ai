@@ -17,7 +17,7 @@ const App = () => (
       <LanguageProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <HashRouter>
             <ChatProvider>
               <Routes>
                 <Route path="/" element={<Index />} />
