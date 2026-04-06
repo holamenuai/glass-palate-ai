@@ -55,7 +55,7 @@ export const translations: Record<Language, TranslationKeys> = {
     howCanIHelp: 'How can I help you?',
     speak: 'Speak',
     write: 'Write',
-    startChatting: "Ask Giuseppe's AI",
+    startChatting: "Ask Vladimir's AI",
     selectAllergies: 'SELECT ALLERGIES',
     quickAsk: 'QUICK ASK',
     gluten: 'Gluten',
